@@ -38,8 +38,6 @@
  * holder.
  */
 
-package javax.json.stream;
-
 /**
  * Java API for JSON Processing API provides a way to process
  * (for e.g. parse, generate, transform and query) JSON.
@@ -68,3 +66,4 @@ package javax.json.stream;
  *
  * Streaming - split String values into multiple parts
  */
+package javax.json.stream;

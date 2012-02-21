@@ -38,11 +38,10 @@
  * holder.
  */
 
-package javax.json.tree;
-
 /**
  * Provides a JSON visitor that constructus a tree representation of the JSON
  * text it visits.
  *
  * @author Jitendra Kotamraju
  */
+package javax.json.tree;
