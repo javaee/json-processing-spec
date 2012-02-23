@@ -74,12 +74,12 @@ public interface JsonArrayVisitor {
     void visitNumber(Number value);
 
     /**
-     * Visits true value
+     * Visits a true value
      */
     void visitTrue();
 
     /**
-     * Visits false value
+     * Visits a false value
      */
     void visitFalse();
 

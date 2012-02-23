@@ -43,7 +43,7 @@ package javax.json;
 /**
  * A visitor to visit JSON
  *
- * TODO should we remove this and just use JsonArrayVisitor and JsonObjectVisitor ?
+ * <p>TODO should we remove this and just use JsonArrayVisitor and JsonObjectVisitor ?
  *
  * @author Jitendra Kotamraju
  */
@@ -52,7 +52,7 @@ public interface JsonVisitor {
      * Visits an array
      * 
      * @return a visitor to visit array value
-     * TODO null if this visitor is not interested in visiting the object ?
+     * <p>TODO null if this visitor is not interested in visiting the object ?
      */
     JsonArrayVisitor visitArray();
 
@@ -60,7 +60,7 @@ public interface JsonVisitor {
      * Visits an object
      *
      * @return a visitor to visit object value
-     * TODO null if this visitor is not interested in visiting the object ?
+     * <p>TODO null if this visitor is not interested in visiting the object ?
      */
     JsonObjectVisitor visitObject();
 }

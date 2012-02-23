@@ -76,14 +76,14 @@ public interface JsonObjectVisitor {
     void visitNumber(String name, Number value);
 
     /**
-     * Visits true value member
+     * Visits a true value member
      *
      * @param name member name
      */
     void visitTrue(String name);
 
     /**
-     * Visits false value member
+     * Visits a false value member
      *
      * @param name member name
      */
