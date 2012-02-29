@@ -43,10 +43,7 @@ package javax.json.tree;
 import javax.json.spi.JsonProvider;
 
 /**
- * <code>JsonBoolean</code> represents JSON boolean value type.
- *
- * TODO Do we need a separate type JsonFalse or JsonValue.TRUE/JsonValue.FALSE
- * good enough ?
+ * <code>JsonFalse</code> represents JSON boolean value type false.
  *
  * @author Jitendra Kotamraju
  */

@@ -86,8 +86,10 @@ import java.util.*;
  * origObject.accept(newObject);
  * </pre>
  *
+ * <p>
  * TODO 1. order of name-value pairs. RFC says "unordered collection of zero or more name/value
- * pairs". Should we preserve the order or not
+ * pairs". Should we preserve the order or not ?
+ * <p>
  * TODO 2. Duplicate names. RFC says "The names within an object SHOULD be unique." Shall we
  * allow it or not ? json.org doesn't allow it. Need to experiment with javascript
  *
@@ -100,8 +102,21 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
         return JsonProvider.provider().createObject();
     }
 
+    /**
+     * Makes the specified {@code JsonObjectVisitor} visit this JSON object
+     *
+     * @param visitor a JSON object value visitor
+     */
     public abstract void accept(JsonObjectVisitor visitor);
 
+    /**
+     * Returns the value to which the specified name is mapped,
+     * or {@code null} if this object contains no mapping for the name.
+     *
+     * @param name the name whose associated value is to be returned
+     * @return the value to which the specified name is mapped, or
+     *         {@code null} if this object contains no mapping for the name
+     */
     public abstract JsonValue getValue(String name);
 
     public abstract void setValue(String name, JsonValue value);
@@ -112,65 +127,211 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
 
     public abstract Map<String, JsonValue> getNameValueMap();
 
+    /**
+     * Adds the specified name/{@code JsonObject} value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public abstract JsonObject addObject(String name, JsonObject value);
 
+    /**
+     * Adds the specified name/{@code JSONArray} value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public abstract JsonObject addArray(String name, JsonArray value);
 
+    /**
+     * Adds the specified name/{@code JsonString} value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public abstract JsonObject addString(String name, JsonString value);
 
+    /**
+     * Adds the specified name/{@code JsonNumber} value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public abstract JsonObject addNumber(String name, JsonNumber value);
 
+    /**
+     * Adds the specified name/{@code JsonTrue} value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public abstract JsonObject addTrue(String name, JsonTrue value);
 
+    /**
+     * Adds the specified name/{@code JsonFalse} value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public abstract JsonObject addFalse(String name, JsonFalse value);
 
+    /**
+     * Adds the specified name/{@code JsonNull} value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public abstract JsonObject addNull(String name, JsonNull value);
 
+    /**
+     * Adds the specified name/JSON string value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public JsonObject addString(String name, String value) {
         return addString(name, JsonString.create(value));
     }
 
+    /**
+     * Adds the specified name/JSON number value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     * @return
+     */
     public JsonObject addNumber(String name, Number value) {
         return addNumber(name, JsonNumber.create(value));
     }
 
+    /**
+     * Adds the specified name/JSON true value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @return
+     */
     public JsonObject addTrue(String name) {
         return addTrue(name, JsonTrue.JSON_TRUE);
     }
 
+    /**
+     * Adds the specified name/JSON false value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @return
+     */
     public JsonObject addFalse(String name) {
         return addFalse(name, JsonFalse.JSON_FALSE);
     }
 
+    /**
+     * Adds the specified name/JSON null value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @return
+     */
     public JsonObject addNull(String name) {
         return addNull(name, JsonNull.JSON_NULL);
     }
 
+    /**
+     * Adds the specified name/JSON string value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     */
     @Override
     public void visitString(String name, String value) {
         addString(name, value);
     }
 
+    /**
+     * Adds the specified name/JSON number value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     * @param value
+     */
     @Override
     public void visitNumber(String name, Number value) {
         addNumber(name, value);
     }
 
+    /**
+     * Adds the specified name/JSON true value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     */
     @Override
     public void visitTrue(String name) {
         addTrue(name);
     }
 
+    /**
+     * Adds the specified name/JSON false value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     */
     @Override
     public void visitFalse(String name) {
         addFalse(name);
     }
 
+    /**
+     * Adds the specified name/JSON null value pair to this JSON object.
+     * If the object previously contained a value for the name, the old value
+     * is replaced.
+     *
+     * @param name
+     */
     @Override
     public void visitNull(String name) {
         addNull(name);
     }
 
+    /**
+     * Removes all of the name/value pairs from this JSON object.
+     * The object will be empty after this call returns.
+     */
     public abstract void clear();
 
 }
