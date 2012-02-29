@@ -43,7 +43,7 @@ package javax.json.tree;
 import javax.json.spi.JsonProvider;
 
 /**
- * <code>JsonFalse</code> represents JSON boolean value type false.
+ * {@code JsonFalse} represents a JSON false value
  *
  * @author Jitendra Kotamraju
  */
@@ -51,14 +51,14 @@ public abstract class JsonFalse implements JsonValue {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constant for JSON boolean false value
+     * Constant for the JSON false value
      */
     public static final JsonFalse JSON_FALSE = create();
 
     /**
      * Creates a JSON false value
      *
-     * @return JSON boolean value
+     * @return a JSON false value
      */
     static JsonFalse create() {
         return JsonProvider.provider().createFalse();

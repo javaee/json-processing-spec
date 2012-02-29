@@ -43,13 +43,12 @@ package javax.json.tree;
 import javax.json.spi.JsonProvider;
 
 /**
- * <code>JsonNull</code> represents JSON null value type.
- *
- * TODO Do we need a separate type JsonNull or JsonValue.NULL
-     good enough ?
+ * <code>JsonNull</code> represents a JSON null value.
  *
  * @author Jitendra Kotamraju
  */
+// TODO Do we need a separate type JsonNull or JsonValue.NULL
+// TODO good enough ?
 public abstract class JsonNull implements JsonValue {
     private static final long serialVersionUID = 1L;
 
@@ -61,7 +60,7 @@ public abstract class JsonNull implements JsonValue {
     /**
      * Creates a JSON null value
      *
-     * @return JSON null value
+     * @return a JSON null value
      */
     static JsonNull create() {
         return JsonProvider.provider().createNull();

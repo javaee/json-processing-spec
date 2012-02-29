@@ -43,7 +43,7 @@ package javax.json.tree;
 import javax.json.spi.JsonProvider;
 
 /**
- * <code>JsonString</code> represents JSON string value type.
+ * {@code JsonString} represents a JSON string value
  *
  * @author Jitendra Kotamraju
  */
@@ -51,18 +51,19 @@ public abstract class JsonString implements JsonValue {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Creates a JSON boolean value for a given boolean
-     * @param value boolean value
-     * @return JSON boolean value
+     * Creates a {@code JsonString} for the specified JSON string value
+     *
+     * @param value JSON string value
+     * @return a JsonString
      */
     public static JsonString create(String value) {
         return JsonProvider.provider().createString(value);
     }
 
     /**
-     * Returns JSON string value
+     * Returns the JSON string value
      *
-     * @return JSON string value
+     * @return a JSON string value
      */
     public abstract String getValue();
 

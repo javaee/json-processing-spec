@@ -39,7 +39,7 @@
  */
 
 /**
- * Provides a JSON visitor that constructus a tree representation of the JSON
+ * Provides a JSON visitor that builds a tree representation of the JSON
  * text it visits.
  *
  * @author Jitendra Kotamraju

@@ -49,17 +49,17 @@ package javax.json;
  */
 public interface JsonVisitor {
     /**
-     * Visits an array
+     * Visits a JSON array
      * 
-     * @return a visitor to visit array value
+     * @return a visitor to visit array
      * <p>TODO null if this visitor is not interested in visiting the object ?
      */
     JsonArrayVisitor visitArray();
 
     /**
-     * Visits an object
+     * Visits a JSON object
      *
-     * @return a visitor to visit object value
+     * @return a visitor to visit object
      * <p>TODO null if this visitor is not interested in visiting the object ?
      */
     JsonObjectVisitor visitObject();

@@ -47,9 +47,9 @@ import java.io.Reader;
 
 /**
  * A JSON parser.
- *
- * This class parses JSON and calls the appropriate visit methods of a given
- * JSON visitor.
+ * <p>
+ * This class parses JSON and calls the appropriate visit methods of a
+ * specified JSON visitor.
  *
  * @author Jitendra Kotamraju
  */
@@ -66,7 +66,7 @@ public abstract class JsonPushReader implements /*Auto*/Closeable {
     }
 
     /**
-     * Calls the appropriate visit methods of a given JSON visitor.
+     * Calls the appropriate visit methods of a specified JSON visitor.
      *
      * @param visitor the visitor
      * @throws IllegalStateException if called more than once

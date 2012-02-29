@@ -43,16 +43,29 @@ package javax.json.tree;
 import javax.json.spi.JsonProvider;
 
 /**
- * <code>JsonNumber</code> represents JSON number value type.
+ * <code>JsonNumber</code> represents a JSON number value.
  *
  * @author Jitendra Kotamraju
  */
 public abstract class JsonNumber implements JsonValue {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Creates a {@code JsonNumber} for the specified JSON number value
+     *
+     * @param value JSON number value. Its type must be one of : {@code Byte},
+     * {@code Short}, {@code Integer}, {@code Long}, {@code Float},
+     * {@code Double}, {@code BigInteger} and {@code BigDecimal}.
+     * @return a JSON number value
+     */
     public static JsonNumber create(Number value) {
         return JsonProvider.provider().createNumber(value);
     }
 
+    /**
+     * Returns the JSON number value
+     *
+     * @return a JSON number value
+     */
     public abstract Number getValue();
 }

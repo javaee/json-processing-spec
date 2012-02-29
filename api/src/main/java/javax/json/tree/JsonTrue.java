@@ -43,7 +43,7 @@ package javax.json.tree;
 import javax.json.spi.JsonProvider;
 
 /**
- * <code>JsonTrue</code> represents JSON boolean value type true.
+ * {@code JsonTrue} represents a JSON true value
  *
  * @author Jitendra Kotamraju
  */
@@ -51,14 +51,14 @@ public abstract class JsonTrue implements JsonValue {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constant for JSON true value
+     * Constant for the JSON true value
      */
     public static final JsonTrue JSON_TRUE = create();
 
-
     /**
-     * Creates a JSON boolean value for a given boolean
-     * @return JSON boolean value
+     * Creates a JSON true value
+     *
+     * @return a JSON true value
      */
     static JsonTrue create() {
         return JsonProvider.provider().createTrue();

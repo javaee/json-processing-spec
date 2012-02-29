@@ -98,6 +98,11 @@ import java.util.*;
 public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Creates a JSON object
+     *
+     * @return a JSON object
+     */
     public static JsonObject create() {
         return JsonProvider.provider().createObject();
     }
@@ -121,6 +126,16 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
 
     public abstract void setValue(String name, JsonValue value);
 
+    /**
+     * Removes the name/value pair value that is associated with the
+     * specified name. Returns the value that is associated with the
+     * specified name. The object will not contain the associated name/value
+     * pair once the call returns.
+     *
+     * @param name name whose associated name/value pair is to be removed
+     * @return previous value associated with the specified name,
+     *         or null if there was no mapping for the name
+     */
     public abstract JsonValue remove(String name);
 
     public abstract Set<String> getNames();

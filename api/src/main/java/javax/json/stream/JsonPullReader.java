@@ -48,6 +48,8 @@ import java.io.Closeable;
 import java.io.Reader;
 
 /**
+ * A JSON parser.
+ *
  * @author Jitendra Kotamraju
  */
 /*

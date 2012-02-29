@@ -41,13 +41,13 @@
 package javax.json;
 
 /**
- * A visitor to visit JSON array.
+ * A visitor to visit a JSON array
  *
  * @author Jitendra Kotamraju
  */
 public interface JsonArrayVisitor {
     /**
-     * Visits a string value
+     * Visits a JSON string value
      *
      * @param value
      */
@@ -62,7 +62,7 @@ public interface JsonArrayVisitor {
     //    void visitNumber(BigDecimal value);
 
     /**
-     * Visits a number value.
+     * Visits a JSON number value.
      *
      * TODO should we have two methods one for integer and one for floating point value
      * TODO should we have separate vistNumber methods like visitNumber(int value)
@@ -74,12 +74,12 @@ public interface JsonArrayVisitor {
     void visitNumber(Number value);
 
     /**
-     * Visits a true value
+     * Visits a JSON true value
      */
     void visitTrue();
 
     /**
-     * Visits a false value
+     * Visits a JSON false value
      */
     void visitFalse();
 
@@ -94,12 +94,12 @@ public interface JsonArrayVisitor {
     */
 
     /**
-     * Visits a null value
+     * Visits a JSON null value
      */
     void visitNull();
 
     /**
-     * Visits an array value
+     * Visits a JSON array value
      *
      * @return a visitor to visit array value
      * TODO null if this array visitor is not interested in visiting the array,
@@ -108,7 +108,7 @@ public interface JsonArrayVisitor {
     JsonArrayVisitor visitArray();
 
     /**
-     * Visits an object
+     * Visits a JSON object value
      * 
      * @return a visitor to visit object value
      * TODO null if this array visitor is not interested in visiting the object,

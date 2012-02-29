@@ -48,7 +48,7 @@
  * <li>Build a Java object model for JSON text using API classes(similar to DOM API for XML)</li>
  * </ul>
  *
- * The API uses popular visitor pattern and built around <code>JsonObjectVisitor</code>, <code>JsonArrayVisitor</code> that
+ * The API uses popular visitor pattern and builds around <code>JsonObjectVisitor</code>, <code>JsonArrayVisitor</code> that
  * can be used to visit the JSON objects, arrays and their members.
  *
  * @since Java API for JSON Processing 1.0

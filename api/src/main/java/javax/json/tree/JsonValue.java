@@ -43,7 +43,7 @@ package javax.json.tree;
 import java.io.Serializable;
 
 /**
- * <code>JsonValue</code> represents a JSON value type.
+ * <code>JsonValue</code> represents a JSON value
  *
  * @author Jitendra Kotamraju
  */
