@@ -40,7 +40,6 @@
 
 package javax.json.stream;
 
-import javax.json.JsonVisitor;
 import javax.json.spi.JsonProvider;
 import javax.json.tree.JsonArray;
 import javax.json.tree.JsonObject;
@@ -48,7 +47,7 @@ import java.io.Closeable;
 import java.io.Reader;
 
 /**
- * A JSON parser.
+ * A JSON pull parser.
  *
  * @author Jitendra Kotamraju
  */
@@ -59,33 +58,102 @@ import java.io.Reader;
 
  */
 public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, /*Auto*/Closeable {
+    /**
+     * Event for parser state while parsing the JSON
+     */
     public enum Event {
+        /**
+         * Event for start of an array
+         */
         START_ARRAY,
+        /**
+         * Event for start of an object
+         */
         START_OBJECT,
+        /**
+         * Event for name in name/value pair in an object
+         */
         KEY_NAME,
+        /**
+         * Event for string value
+         */
         VALUE_STRING,
+        /**
+         * Event for number value
+         */
         VALUE_NUMBER,
+        /**
+         * Event for true value
+         */
         VALUE_TRUE,
+        /**
+         * Event for false value
+         */
         VALUE_FALSE,
+        /**
+         * Event for null value
+         */
         VALUE_NULL,
+        /**
+         * Event for end of an object
+         */
         END_OBJECT,
+        /**
+         * Event for end of an array
+         */
         END_ARRAY
     }
 
+    /**
+     * Returns name when the state is {@link Event#KEY_NAME} or returns string value when the state is
+     * {@link Event#VALUE_STRING}
+     * 
+     * @return a string
+     * @throws IllegalStateException when the event state is not in KEY_NAME or VALUE_STRING
+     */
     public abstract String getString();
+
+    /**
+     * Returns a JSON number when the state is {@link Event#VALUE_NUMBER}
+     *
+     * @return a number
+     * @throws IllegalStateException when the state is not VALUE_NUMBER
+     */
     public abstract Number getNumber();
 
+    /**
+     * Closes this reader and frees any resources associated with the
+     * reader. This doesn't close the underlying input source.
+     */
     @Override
     public abstract void close();
 
+    /**
+     * Creates a JSON pull reader from a character stream
+     *
+     * @param reader a reader from which JSON is to be read
+     * @return a JSON pull reader
+     */
     public static JsonPullReader create(Reader reader) {
         return JsonProvider.provider().createJsonPullReader(reader);
     }
 
+    /**
+     * Creates a JSON pull reader from a JSON array
+     *
+     * @param array a JSON array
+     * @return a JSON pull reader
+     */
     public static JsonPullReader create(JsonArray array) {
         return JsonProvider.provider().createJsonPullReader(array);
     }
 
+    /**
+     * Creates a JSON pull reader from a JSON object
+     *
+     * @param object a JSON object
+     * @return a JSON pull reader
+     */
     public static JsonPullReader create(JsonObject object) {
         return JsonProvider.provider().createJsonPullReader(object);
     }
