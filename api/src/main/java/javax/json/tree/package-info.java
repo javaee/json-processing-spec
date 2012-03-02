@@ -39,8 +39,15 @@
  */
 
 /**
- * Provides a JSON visitor that builds a tree representation of the JSON
- * text it visits.
+ * API to build an object model or a tree representation of a JSON text.
+ *
+ * <p>
+ * The API can be compared to Document Object Model (DOM) APIs
+ * for XML documents. It provides {@link JsonObject},
+ * a {@link javax.json.JsonObjectVisitor}, that builds an object
+ * model of a JSON object. Similarly, it also provides {@link JsonArray},
+ * a {@link javax.json.JsonArrayVisitor}, that builds an object
+ * model of a JSON array.
  *
  * @author Jitendra Kotamraju
  */
