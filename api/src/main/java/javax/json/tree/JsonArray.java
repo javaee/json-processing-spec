@@ -47,7 +47,7 @@ import java.util.List;
 
 /**
  * {@code JsonArray} class represents a JSON array value. It
- * also implements {@code JsonArrayVisitor}, hence an instance can
+ * also implements {@link JsonArrayVisitor}, hence an instance can
  * be built by calling the visitor methods. For example, an instance can be
  * built as follows:
  *
@@ -75,7 +75,7 @@ import java.util.List;
  * arr.accept(writer.visitArray());
  * </pre>
  *
- * Since {@code JsonObject} implements {@code JsonArrayVisitor}, copying
+ * Since {@code JsonObject} implements {@link JsonArrayVisitor}, copying
  * an array can be done as follows:
  * <pre>
  * JsonArray newArray = new JsonArray();

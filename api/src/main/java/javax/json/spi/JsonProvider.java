@@ -45,11 +45,12 @@ import javax.json.stream.JsonPullReader;
 import javax.json.stream.JsonPushReader;
 import javax.json.stream.JsonWriter;
 import javax.json.tree.*;
-import javax.xml.ws.WebServiceException;
 import java.io.Reader;
 import java.io.Writer;
 
 /**
+ * Service provider for JSON objects.
+ *
  * @author Jitendra Kotamraju
  */
 public abstract class JsonProvider {
@@ -79,7 +80,7 @@ public abstract class JsonProvider {
 
     /**
      *
-     * Creates a new provider object.
+     * Creates a JSON provider object.
      * <p>
      * The algorithm used to locate the provider subclass to use consists
      * of the following steps:
@@ -106,8 +107,10 @@ public abstract class JsonProvider {
      * </li>
      * </ul>
      *
+     * @return a JSON provider
      */
     public static JsonProvider provider() {
+        // TODO cache provider
         try {
             return (JsonProvider)FactoryFinder.find(JSON_PROVIDER_PROPERTY, DEFAULT_JSON_PROVIDER);
         } catch (JsonException ex) {
@@ -120,89 +123,94 @@ public abstract class JsonProvider {
     /**
      * Creates a JSON writer
      *
-     * @param writer
-     * @return
+     * @param writer to which data is written
+     * @return a JSON writer
      */
     public abstract JsonWriter createJsonWriter(Writer writer);
 
     /**
      * Creates a JSON pull reader
      *
-     * @param reader
-     * @return
+     * @param reader a reader from which JSON is to be read
+     * @return a JSON pull reader
      */
     public abstract JsonPullReader createJsonPullReader(Reader reader);
 
     /**
      * Creates a JSON push reader
      *
-     * @param reader
-     * @return
+     * @param reader from which JSON is read
+     * @return a JSON push reader
      */
     public abstract JsonPushReader createJsonPushReader(Reader reader);
 
     /**
      * Creates a JSON reader from array
      *
-     * @param array
-     * @return
+     * @param array a JSON array
+     * @return a JSON pull reader
      */
     public abstract JsonPullReader createJsonPullReader(JsonArray array);
 
     /**
-     * Creates a JSON reader from object
+     * Creates a JSON pull reader from a JSON object
      *
-     * @param object
-     * @return
+     * @param object a JSON object
+     * @return a JSON pull reader
      */
     public abstract JsonPullReader createJsonPullReader(JsonObject object);
 
     /**
      * Creates a JSON array value
      *
-     * @return
+     * @return a JSON array
      */
     public abstract JsonArray createArray();
 
     /**
      * Creates a JSON null value
      *
-     * @return
+     * @return a JSON null
      */
     public abstract JsonNull createNull();
 
     /**
-     * Creates a JSON number value
+     * Creates a {@code JsonNumber} for the specified JSON number value
      *
-     * @return
+     * @param value JSON number value. Its type must be one of : {@code Byte},
+     * {@code Short}, {@code Integer}, {@code Long}, {@code Float},
+     * {@code Double}, {@code BigInteger} and {@code BigDecimal}.
+     * @return a JSON number value
      */
     public abstract JsonNumber createNumber(Number value);
 
+
     /**
-     * Creates a JSON string value
+     * Creates a {@code JsonString} for the specified JSON string value
      *
-     * @return
+     * @param value JSON string value
+     * @return a JsonString
      */
     public abstract JsonString createString(String value);
 
     /**
-     * Creates a JSON object value
+     * Creates a JSON object
      *
-     * @return
+     * @return a JSON object
      */
     public abstract JsonObject createObject();
 
     /**
      * Creates a JSON true value
      *
-     * @return
+     * @return a JSON true
      */
     public abstract JsonTrue createTrue();
 
     /**
      * Creates a JSON false value
      *
-     * @return
+     * @return a JSON false
      */
     public abstract JsonFalse createFalse();
 }

@@ -46,7 +46,7 @@ import java.util.*;
 
 /**
  * {@code JsonObject} class represents a JSON object value. It
- * also implements {@code JsonObjectVisitor}, hence an instance can
+ * also implements {@link JsonObjectVisitor}, hence an instance can
  * be built by calling the visitor methods. For example, an instance can be
  * built as follows:
  *
@@ -62,7 +62,7 @@ import java.util.*;
  * personObj.visitArray("phoneNumber", phoneArray);
  * </pre>
  *
- * Convienently, fluent style can be used while building a {@code JsonObject}
+ * Convienently, fluent style can also be used while building a {@code JsonObject}
  * instance. For example, an instance can be built as follows:
  * <pre>
  * JsonObject personObj = JsonObject.create().addString("firstName", "John")
@@ -79,7 +79,7 @@ import java.util.*;
  * obj.accept(writer.visitObject());
  * </pre>
  *
- * Since {@code JsonObject} implements {@code JsonObjectVisitor}, copying
+ * Since {@code JsonObject} implements {@link JsonObjectVisitor}, copying
  * an object can be done as follows:
  * <pre>
  * JsonObject newObject = new JsonObject();
@@ -108,7 +108,7 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     }
 
     /**
-     * Makes the specified {@code JsonObjectVisitor} visit this JSON object
+     * Makes the specified {@link JsonObjectVisitor} visit this JSON object
      *
      * @param visitor a JSON object value visitor
      */
