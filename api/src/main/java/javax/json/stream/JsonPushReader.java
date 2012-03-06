@@ -46,7 +46,7 @@ import java.io.Closeable;
 import java.io.Reader;
 
 /**
- * A JSON parser.
+ * A JSON push parser.
  * <p>
  * This class parses JSON and calls the appropriate visit methods of a
  * specified JSON visitor.

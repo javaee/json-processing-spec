@@ -105,11 +105,12 @@ public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, 
     }
 
     /**
-     * Returns name when the state is {@link Event#KEY_NAME} or returns string value when the state is
-     * {@link Event#VALUE_STRING}
+     * Returns name when the state is {@link Event#KEY_NAME} or returns string
+     * value when the state is {@link Event#VALUE_STRING}
      * 
      * @return a string
-     * @throws IllegalStateException when the event state is not in KEY_NAME or VALUE_STRING
+     * @throws IllegalStateException when the event state is not in
+     *      KEY_NAME or VALUE_STRING
      */
     public abstract String getString();
 

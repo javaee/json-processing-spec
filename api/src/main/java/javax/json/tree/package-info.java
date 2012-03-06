@@ -43,11 +43,11 @@
  *
  * <p>
  * The API can be compared to Document Object Model (DOM) APIs
- * for XML documents. It provides {@link JsonObject},
+ * for XML documents. It provides {@link javax.json.tree.JsonObject},
  * a {@link javax.json.JsonObjectVisitor}, that builds an object
- * model of a JSON object. Similarly, it also provides {@link JsonArray},
- * a {@link javax.json.JsonArrayVisitor}, that builds an object
- * model of a JSON array.
+ * model of a JSON object. Similarly, it also provides
+ * {@link javax.json.tree.JsonArray}, a {@link javax.json.JsonArrayVisitor},
+ * that builds an object model of a JSON array.
  *
  * @author Jitendra Kotamraju
  */

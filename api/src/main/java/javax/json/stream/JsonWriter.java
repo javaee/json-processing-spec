@@ -47,7 +47,41 @@ import java.io.Writer;
 
 /**
  * A JSON generator. It is also a {@code JsonVisitor} and its visit methods
- * are called to generate JSON.
+ * are called to generate JSON. For example:
+ *
+ * <code>
+ * <pre>
+ * JsonWriter writer = JsonWriter.create(...);
+ * JsonObjectVisitor personWriter = writer.visitObject();
+ * personWriter.visitString("firstName", "John");
+ * personWriter.visitString("lastName", "Smith");
+ * personWriter.visitNumber("age", 25);
+ * JsonArrayVisitor phoneWriter = personWriter.visitArray("phoneNumber");
+ * JsonObjectVisitor homePhoneWriter = phoneWriter.visitObject();
+ * homePhoneWriter.visitString("type", "home");
+ * homePhoneWriter.visitString("number", "212 555-1234");
+ * homePhoneWriter.visitEnd();
+ * JsonObjectVisitor faxPhoneWriter = phoneWriter.visitObject();
+ * faxPhoneWriter.visitString("type", "fax");
+ * faxPhoneWriter.visitString("number", "646 555-4567");
+ * faxPhoneWriter.visitEnd();
+ * phoneWriter.visitEnd();
+ * personWriter.visitEnd();
+ * writer.close();
+ *
+ * would produce a JSON equivalent to the following:
+ * {
+ *   "firstName": "John", "lastName": "Smith", "age": 25,
+ *   "phoneNumber": [
+ *       {"type": "home", "number": "212 555-1234"},
+ *       {"type": "fax", "number": "646 555-4567"}
+ *    ]
+ * }
+ *
+ * </pre>
+ * </code>
+ *
+ * TODO should we add convenience methods with method chaining ?
  *
  * @author Jitendra Kotamraju
  */
