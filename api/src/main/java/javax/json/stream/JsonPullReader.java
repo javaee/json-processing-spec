@@ -48,7 +48,9 @@ import java.io.Reader;
 
 /**
  * A JSON pull parser. This is designed to be the most efficient way to
- * read JSON data.
+ * read JSON data. A pull parser can be created from many input sources using
+ * {@link #create(Reader)}, {@link #create(JsonArray)}, {@link #create(JsonObject)}
+ * methods.
  * 
  * <p>
  * A JsonPullReader is used to parse JSON in a pull manner by calling
@@ -92,6 +94,17 @@ import java.io.Reader;
  *    ]<B>END_ARRAY</B>
  * }<B>END_OBJECT</B> parse events at the specified locations.
  * </pre>
+ * 
+ * Here, "John" value is accessed as follows:
+ * <code>
+ * <pre>
+ * Iterator&lt;Event> it = reader.iterator();
+ * Event event = it.next(); // START_OBJECT
+ * event = it.next();       // KEY_NAME
+ * event = it.next();       // VALUE_STRING
+ * reader.getString();      // "John"
+ * </pre>
+ * </code>
  *
  * @author Jitendra Kotamraju
  *
@@ -103,43 +116,52 @@ public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, 
      */
     public enum Event {
         /**
-         * Event for start of an array
+         * Event for start of a JSON array. This event indicates '[' is parsed.
          */
         START_ARRAY,
         /**
-         * Event for start of an object
+         * Event for start of a JSON object. This event indicates '{' is parsed.
          */
         START_OBJECT,
         /**
-         * Event for name in name/value pair in an object
+         * Event for a name in name(key)/value pair of a JSON object. This event
+         * indicates that the key name is parsed. The name/key value itself
+         * can be accessed using {@link #getString}
          */
         KEY_NAME,
         /**
-         * Event for string value
+         * Event for JSON string value. This event indicates a string value in
+         * an array or object is parsed. The string value itself can be
+         * accessed using {@link #getString}
          */
         VALUE_STRING,
         /**
-         * Event for number value
+         * Event for a number value. This event indicates a number value in
+         * an array or object is parsed. The number value itself can be
+         * accessed using {@link #getNumber}
          */
         VALUE_NUMBER,
         /**
-         * Event for true value
+         * Event for a true value. This event indicates a true value in an
+         * array or object is parsed.
          */
         VALUE_TRUE,
         /**
-         * Event for false value
+         * Event for a false value. This event indicates a false value in an
+         * array or object is parsed.
          */
         VALUE_FALSE,
         /**
-         * Event for null value
+         * Event for a null value. This event indicates a null value in an
+         * array or object is parsed.
          */
         VALUE_NULL,
         /**
-         * Event for end of an object
+         * Event for end of an object. This event indicates '}' is parsed.
          */
         END_OBJECT,
         /**
-         * Event for end of an array
+         * Event for end of an array. This event indicates ']' is parsed.
          */
         END_ARRAY
     }
