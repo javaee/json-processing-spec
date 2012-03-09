@@ -93,6 +93,13 @@ import java.util.*;
  * TODO 2. Duplicate names. RFC says "The names within an object SHOULD be unique." Shall we
  * allow it or not ? json.org doesn't allow it. Need to experiment with javascript
  *
+ * <p>
+ * TODO 3. Implement {@code Map<String, JsonValue>} Hard to implement lazily
+ * Too many methods to implement ??
+ *
+ * <p>
+ * TODO 4. define equals() semantics
+ *
  * @author Jitendra Kotamraju
  */
 public abstract class JsonObject implements JsonValue, JsonObjectVisitor {

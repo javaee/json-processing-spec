@@ -47,15 +47,55 @@ import java.io.Closeable;
 import java.io.Reader;
 
 /**
- * A JSON pull parser.
+ * A JSON pull parser. This is designed to be the most efficient way to
+ * read JSON data.
+ * 
+ * <p>
+ * A JsonPullReader is used to parse JSON in a pull manner by calling
+ * its iterator methods. The iterator's {@code next()} method causes the reader
+ * to read the next parse event.
+ * <p>
+ * For example 1:
+ * <p>For empty JSON object { },
+ * the iterator would give {<B>START_OBJECT</B> }<B>END_OBJECT</B> parse
+ * events at the specified locations. Those events can be accessed using the
+ * following code.
+ *
+ * <code>
+ * <pre>
+ * Iterator&lt;Event> it = reader.iterator();
+ * Event event = it.next(); // START_OBJECT
+ * event = it.next();       // END_OBJECT
+ * </pre>
+ * </code>
+ *
+ * <p>
+ * For example 2:
+ * <p>
+ * For the following JSON
+ * <pre>
+ * {
+ *   "firstName": "John", "lastName": "Smith", "age": 25,
+ *   "phoneNumber": [
+ *       { "type": "home", "number": "212 555-1234" },
+ *       { "type": "fax", "number": "646 555-4567" }
+ *    ]
+ * }
+ *
+ * the iterator would give
+ *
+ * {<B>START_OBJECT</B>
+ *   "firstName"<B>KEY_NAME</B>: "John"<B>VALUE_STRING</B>, "lastName"<B>KEY_NAME</B>: "Smith"<B>VALUE_STRING</B>, "age"<B>KEY_NAME</B>: 25<B>VALUE_NUMBER</B>,
+ *   "phoneNumber"<B>KEY_NAME</B> : [<B>START_ARRAY</B>
+ *       {<B>START_OBJECT</B> "type"<B>KEY_NAME</B>: "home"<B>VALUE_STRING</B>, "number"<B>KEY_NAME</B>: "212 555-1234"<B>VALUE_STRING</B> }<B>END_OBJECT</B>,
+ *       {<B>START_OBJECT</B> "type"<B>KEY_NAME</B>: "fax"<B>VALUE_STRING</B>, "number"<B>KEY_NAME</B>: "646 555-4567"<B>VALUE_STRING</B> }<B>END_OBJECT</B>
+ *    ]<B>END_ARRAY</B>
+ * }<B>END_OBJECT</B> parse events at the specified locations.
+ * </pre>
  *
  * @author Jitendra Kotamraju
- */
-/*
-  Notes to myself:
-  1. Create event objects. Improves type safety, but what about
-  performance ?
-
+ *
+ * <p> TODO Create event objects - Improves type safety, but what about performance ?
  */
 public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, /*Auto*/Closeable {
     /**
@@ -119,6 +159,8 @@ public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, 
      *
      * @return a number
      * @throws IllegalStateException when the state is not VALUE_NUMBER
+     *
+     * <p>TODO Number type based on the precision ??
      */
     public abstract Number getNumber();
 

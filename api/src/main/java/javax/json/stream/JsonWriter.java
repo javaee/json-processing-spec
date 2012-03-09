@@ -40,6 +40,7 @@
 
 package javax.json.stream;
 
+import javax.json.JsonObjectVisitor;
 import javax.json.JsonVisitor;
 import javax.json.spi.JsonProvider;
 import java.io.Closeable;
@@ -97,6 +98,18 @@ public abstract class JsonWriter implements JsonVisitor, /*Auto*/Closeable {
     public static JsonWriter create(Writer writer) {
         return JsonProvider.provider().createJsonWriter(writer);
     }
+
+/*
+    TODO will the following any useful ?
+
+    public static JsonObjectVisitor createObject(Writer writer) {
+        return JsonProvider.provider().createJsonWriter(writer).visitObject();
+    }
+    public static JsonArrayVisitor createArray(Writer writer) {
+        return JsonProvider.provider().createJsonWriter(writer).visitArray();
+    }
+*/
+
 
     /**
      * Closes this writer and frees any resources associated with the

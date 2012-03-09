@@ -55,12 +55,13 @@
  * @author Jitendra Kotamraju
  *
  *
- * Serialization
+ * <p> TODO Serialization
  *
- * Thread-safety
+ * <p> TODO Thread-safety
  *
- * Async support
+ * <p> Async/NIO support
+ * <p> equals() for tree API
+ * <p> Streaming - split String values into multiple parts
  *
- * Streaming - split String values into multiple parts
  */
 package javax.json;
