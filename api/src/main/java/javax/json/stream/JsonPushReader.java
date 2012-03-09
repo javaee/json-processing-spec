@@ -40,6 +40,8 @@
 
 package javax.json.stream;
 
+import javax.json.JsonArrayVisitor;
+import javax.json.JsonObjectVisitor;
 import javax.json.JsonVisitor;
 import javax.json.spi.JsonProvider;
 import java.io.Closeable;
@@ -49,7 +51,22 @@ import java.io.Reader;
  * A JSON push parser.
  * <p>
  * This class parses JSON and calls the appropriate visit methods of a
- * specified JSON visitor.
+ * specified JSON visitor. The push parser can be created as follows:
+ *
+ * <p>
+ * For Example:
+ * <code>
+ * <pre>
+ * JsonVisitor visitor = ...;
+ * JsonPushReader reader = JsonPushReader.create(...);
+ * reader.accept(visitor);
+ * reader.close();
+ * </pre>
+ * </code>
+ *
+ * <p> For the empty JSON object {}, visitor's visitObject() and the returned
+ * object visitor's visitEnd() are called.
+ *
  *
  * @author Jitendra Kotamraju
  */
@@ -68,10 +85,30 @@ public abstract class JsonPushReader implements /*Auto*/Closeable {
     /**
      * Calls the appropriate visit methods of a specified JSON visitor.
      *
-     * @param visitor the visitor
+     * @param visitor a JSON visitor
      * @throws IllegalStateException if called more than once
      */
     public abstract void accept(JsonVisitor visitor);
+
+    /**
+     * TODO shall we add this ? useful esp the reader parses a JSON array
+     *
+     * Calls the appropriate visit methods of a specified JSON array visitor.
+     *
+     * @param visitor a JSON array visitor
+     *
+    public abstract void accept(JsonArrayVisitor visitor);
+     */
+
+    /**
+     * TODO shall we add this ? useful esp the reader parses a JSON Object
+     *
+     * Calls the appropriate visit methods of a specified JSON object visitor.
+     *
+     * @param visitor a JSON object visitor
+     *
+    public abstract void accept(JsonObjectVisitor visitor);
+     */
 
 
     /**
