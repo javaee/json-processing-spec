@@ -94,7 +94,7 @@ import java.util.*;
  * allow it or not ? json.org doesn't allow it. Need to experiment with javascript
  *
  * <p>
- * TODO 3. Implement {@code Map<String, JsonValue>} Hard to implement lazily
+ * TODO 3. Implement {@code Map<String, JsonValue>} Hard to implement lazily ??
  * Too many methods to implement ??
  *
  * <p>
@@ -154,151 +154,151 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
-     * @return
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
      */
-    public abstract JsonObject addObject(String name, JsonObject value);
+    public abstract JsonObject putObject(String name, JsonObject value);
 
     /**
      * Adds the specified name/{@code JSONArray} value pair to this JSON object.
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
-     * @return
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
      */
-    public abstract JsonObject addArray(String name, JsonArray value);
+    public abstract JsonObject putArray(String name, JsonArray value);
 
     /**
      * Adds the specified name/{@code JsonString} value pair to this JSON object.
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
-     * @return
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
      */
-    public abstract JsonObject addString(String name, JsonString value);
+    public abstract JsonObject putString(String name, JsonString value);
 
     /**
      * Adds the specified name/{@code JsonNumber} value pair to this JSON object.
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
-     * @return
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
      */
-    public abstract JsonObject addNumber(String name, JsonNumber value);
+    public abstract JsonObject putNumber(String name, JsonNumber value);
 
     /**
      * Adds the specified name/{@code JsonTrue} value pair to this JSON object.
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
-     * @return
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
      */
-    public abstract JsonObject addTrue(String name, JsonTrue value);
+    public abstract JsonObject putTrue(String name, JsonTrue value);
 
     /**
      * Adds the specified name/{@code JsonFalse} value pair to this JSON object.
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
-     * @return
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
      */
-    public abstract JsonObject addFalse(String name, JsonFalse value);
+    public abstract JsonObject putFalse(String name, JsonFalse value);
 
     /**
      * Adds the specified name/{@code JsonNull} value pair to this JSON object.
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
-     * @return
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
      */
-    public abstract JsonObject addNull(String name, JsonNull value);
+    public abstract JsonObject putNull(String name, JsonNull value);
+
+    /**
+     * A convenience method for {@link #visitString} that allows
+     * method chaining.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
+     * @see #visitString
+     */
+    public JsonObject putString(String name, String value) {
+        return putString(name, JsonString.create(value));
+    }
+
+    /**
+     * A convenience method for {@link #visitNumber} that allows
+     * method chaining.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this JSON object
+     * @see #visitNumber
+     */
+    public JsonObject putNumber(String name, Number value) {
+        return putNumber(name, JsonNumber.create(value));
+    }
+
+    /**
+     * A convenience method for {@link #visitTrue} that allows
+     * method chaining.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @return this JSON object
+     * @see #visitTrue
+     */
+    public JsonObject putTrue(String name) {
+        return putTrue(name, JsonTrue.JSON_TRUE);
+    }
+
+    /**
+     * A convenience method for {@link #visitFalse} that allows
+     * method chaining.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @return this JSON object
+     * @see #visitFalse
+     */
+    public JsonObject putFalse(String name) {
+        return putFalse(name, JsonFalse.JSON_FALSE);
+    }
+
+    /**
+     * A convenience method for {@link #visitNull(String)} that allows
+     * method chaining.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @return this JSON object
+     * @see #visitNull
+     */
+    public JsonObject putNull(String name) {
+        return putNull(name, JsonNull.JSON_NULL);
+    }
 
     /**
      * Adds the specified name/JSON string value pair to this JSON object.
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
-     * @return
-     */
-    public JsonObject addString(String name, String value) {
-        return addString(name, JsonString.create(value));
-    }
-
-    /**
-     * Adds the specified name/JSON number value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
-     *
-     * @param name
-     * @param value
-     * @return
-     */
-    public JsonObject addNumber(String name, Number value) {
-        return addNumber(name, JsonNumber.create(value));
-    }
-
-    /**
-     * Adds the specified name/JSON true value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
-     *
-     * @param name
-     * @return
-     */
-    public JsonObject addTrue(String name) {
-        return addTrue(name, JsonTrue.JSON_TRUE);
-    }
-
-    /**
-     * Adds the specified name/JSON false value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
-     *
-     * @param name
-     * @return
-     */
-    public JsonObject addFalse(String name) {
-        return addFalse(name, JsonFalse.JSON_FALSE);
-    }
-
-    /**
-     * Adds the specified name/JSON null value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
-     *
-     * @param name
-     * @return
-     */
-    public JsonObject addNull(String name) {
-        return addNull(name, JsonNull.JSON_NULL);
-    }
-
-    /**
-     * Adds the specified name/JSON string value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
-     *
-     * @param name
-     * @param value
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
      */
     @Override
     public void visitString(String name, String value) {
-        addString(name, value);
+        putString(name, value);
     }
 
     /**
@@ -306,12 +306,12 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
-     * @param value
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
      */
     @Override
     public void visitNumber(String name, Number value) {
-        addNumber(name, value);
+        putNumber(name, value);
     }
 
     /**
@@ -319,35 +319,35 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
+     * @param name name/key with which the specified value is to be associated
      */
     @Override
     public void visitTrue(String name) {
-        addTrue(name);
+        putTrue(name);
     }
 
     /**
-     * Adds the specified name/JSON false value pair to this JSON object.
+     * Associates the false value with the specified name/key in this JSON object.
      * If the object previously contained a value for the name, the old value
      * is replaced.
      *
-     * @param name
+     * @param name name/key with which the specified value is to be associated
      */
     @Override
     public void visitFalse(String name) {
-        addFalse(name);
+        putFalse(name);
     }
 
     /**
-     * Adds the specified name/JSON null value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
+     * Associates the null value with the specified name/key in this JSON
+     * object. If the object previously contained a value for the name, the
+     * old value is replaced.
      *
-     * @param name
+     * @param name name/key with which the specified value is to be associated
      */
     @Override
     public void visitNull(String name) {
-        addNull(name);
+        putNull(name);
     }
 
     /**
