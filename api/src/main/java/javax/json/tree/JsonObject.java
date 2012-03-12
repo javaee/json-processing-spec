@@ -62,14 +62,14 @@ import java.util.*;
  * personObj.visitArray("phoneNumber", phoneArray);
  * </pre>
  *
- * Convienently, fluent style can also be used while building a {@code JsonObject}
- * instance. For example, an instance can be built as follows:
+ * Convienently, method chaining can also be used while building a
+ * {@code JsonObject} instance. For example, an instance can be built as follows:
  * <pre>
  * JsonObject personObj = JsonObject.create().addString("firstName", "John")
- *         .addString("lastName", "Smith")
- *         .addNumber("age", 25)
- *         .addObject("address", addressObj)
- *         .addArray("phoneNumber", phoneArray);
+ *         .putString("lastName", "Smith")
+ *         .putNumber("age", 25)
+ *         .putObject("address", addressObj)
+ *         .putArray("phoneNumber", phoneArray);
  * </pre>
  *
  * {@code JsonObject} can be written to JSON text as follows:
@@ -94,7 +94,7 @@ import java.util.*;
  * allow it or not ? json.org doesn't allow it. Need to experiment with javascript
  *
  * <p>
- * TODO 3. Implement {@code Map<String, JsonValue>} Hard to implement lazily ??
+ * TODO 3. Implement {@code Map&lt;String, JsonValue>} Hard to implement lazily ??
  * Too many methods to implement ??
  *
  * <p>
@@ -122,16 +122,24 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     public abstract void accept(JsonObjectVisitor visitor);
 
     /**
-     * Returns the value to which the specified name is mapped,
-     * or {@code null} if this object contains no mapping for the name.
+     * Returns the value to which the specified name/key is mapped,
+     * or {@code null} if this object contains no mapping for the name/key.
      *
-     * @param name the name whose associated value is to be returned
+     * @param name the name/key whose associated value is to be returned
      * @return the value to which the specified name is mapped, or
-     *         {@code null} if this object contains no mapping for the name
+     *         {@code null} if this object contains no mapping for the name/key
      */
     public abstract JsonValue getValue(String name);
 
-    public abstract void setValue(String name, JsonValue value);
+    /**
+     * Associates the specified {@link JsonValue} value with the
+     * specified name/key in this JSON object. If the object previously
+     * contained a value for the name, the old value is replaced.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     */
+    public abstract void putValue(String name, JsonValue value);
 
     /**
      * Removes the name/value pair value that is associated with the
@@ -145,14 +153,26 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
      */
     public abstract JsonValue remove(String name);
 
+    /**
+     * Returns a {@link Set} of the name/keys contained in this JSON object.
+     * Any changes to the set do not affect this JSON object.
+     *
+     * @return a set of the name/keys contained in this JSON object
+     */
     public abstract Set<String> getNames();
 
+    /**
+     * Returns a {@link Map} of the name(key)/value pairs contained in
+     * this JSON object. Any changes to the map do not affect this JSON object.
+     *
+     * @return a set of the name/keys contained in this JSON object
+     */
     public abstract Map<String, JsonValue> getNameValueMap();
 
     /**
-     * Adds the specified name/{@code JsonObject} value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
+     * Associates the specified {@link JsonObject} value with the
+     * specified name/key in this JSON object. If the object previously
+     * contained a value for the name, the old value is replaced.
      *
      * @param name name/key with which the specified value is to be associated
      * @param value value to be associated with the specified name/key
@@ -161,9 +181,9 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     public abstract JsonObject putObject(String name, JsonObject value);
 
     /**
-     * Adds the specified name/{@code JSONArray} value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
+     * Associates the specified {@link JsonArray} value with the
+     * specified name/key in this JSON object. If the object previously
+     * contained a value for the name, the old value is replaced.
      *
      * @param name name/key with which the specified value is to be associated
      * @param value value to be associated with the specified name/key
@@ -172,9 +192,9 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     public abstract JsonObject putArray(String name, JsonArray value);
 
     /**
-     * Adds the specified name/{@code JsonString} value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
+     * Associates the specified {@link JsonString} value with the
+     * specified name/key in this JSON object. If the object previously
+     * contained a value for the name, the old value is replaced.
      *
      * @param name name/key with which the specified value is to be associated
      * @param value value to be associated with the specified name/key
@@ -183,9 +203,9 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     public abstract JsonObject putString(String name, JsonString value);
 
     /**
-     * Adds the specified name/{@code JsonNumber} value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
+     * Associates the specified {@link JsonNumber} value with the
+     * specified name/key in this JSON object. If the object previously
+     * contained a value for the name, the old value is replaced.
      *
      * @param name name/key with which the specified value is to be associated
      * @param value value to be associated with the specified name/key
@@ -194,9 +214,9 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     public abstract JsonObject putNumber(String name, JsonNumber value);
 
     /**
-     * Adds the specified name/{@code JsonTrue} value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
+     * Associates the specified {@link JsonTrue}true value with the
+     * specified name/key in this JSON object. If the object previously
+     * contained a value for the name, the old value is replaced.
      *
      * @param name name/key with which the specified value is to be associated
      * @param value value to be associated with the specified name/key
@@ -205,9 +225,9 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     public abstract JsonObject putTrue(String name, JsonTrue value);
 
     /**
-     * Adds the specified name/{@code JsonFalse} value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
+     * Associates the specified {@link JsonFalse} value with the
+     * specified name/key in this JSON object. If the object previously
+     * contained a value for the name, the old value is replaced.
      *
      * @param name name/key with which the specified value is to be associated
      * @param value value to be associated with the specified name/key
@@ -216,9 +236,9 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     public abstract JsonObject putFalse(String name, JsonFalse value);
 
     /**
-     * Adds the specified name/{@code JsonNull} value pair to this JSON object.
-     * If the object previously contained a value for the name, the old value
-     * is replaced.
+     * Associates the specified {@link JsonNull} value with the
+     * specified name/key in this JSON object. If the object previously
+     * contained a value for the name, the old value is replaced.
      *
      * @param name name/key with which the specified value is to be associated
      * @param value value to be associated with the specified name/key
