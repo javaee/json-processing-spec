@@ -224,11 +224,12 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
     public abstract JsonArray addNumber(JsonNumber value);
 
     /**
-     * Appends the specified JSON string value to the end of this array
-     * values
+     * A convenience method for {@link #visitString} that allows
+     * method chaining.
      *
      * @param value a JSON string value
      * @return this JSON array
+     * @see #visitString
      */
     public JsonArray addString(String value) {
         JsonString string = JsonString.create(value);
@@ -236,11 +237,12 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
     }
 
     /**
-     * Appends the specified JSON number value to the end of this array
-     * values
+     * A convenience method for {@link #visitNumber} that allows
+     * method chaining.
      *
      * @param value a JSON number value
      * @return this JSON array
+     * @see #visitNumber
      */
     public JsonArray addNumber(Number value) {
         JsonNumber number = JsonNumber.create(value);
@@ -248,27 +250,33 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
     }
 
     /**
-     * Appends a JSON true value to the end of this array values
+     * A convenience method for {@link #visitTrue} that allows
+     * method chaining.
      *
      * @return this JSON array
+     * @see #visitTrue
      */
     public JsonArray addTrue() {
         return addTrue(JsonTrue.JSON_TRUE);
     }
 
     /**
-     * Appends a JSON false value to the end of this array values
+     * A convenience method for {@link #visitFalse} that allows
+     * method chaining.
      *
      * @return this JSON array
+     * @see #visitFalse
      */
     public JsonArray addFalse() {
         return addFalse(JsonFalse.JSON_FALSE);
     }
 
     /**
-     * Appends a JSON null value to the end of this array values
+     * A convenience method for {@link #visitNull} that allows
+     * method chaining.
      *
      * @return this JSON array
+     * @see #visitNull
      */
     public JsonArray addNull() {
         return addNull(JsonNull.JSON_NULL);
