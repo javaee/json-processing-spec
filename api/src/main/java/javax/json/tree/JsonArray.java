@@ -152,6 +152,15 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
     public abstract JsonValue removeValue(int index);
 
     /**
+     * Appends the specified {@code JsonValue} value to the end of this array
+     * values
+     *
+     * @param value a JsonValue value
+     * @return this JSON array
+     */
+    public abstract void addValue(JsonValue value);
+
+    /**
      * Appends the specified {@code JsonArray} value to the end of this array
      * values
      *
