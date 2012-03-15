@@ -91,24 +91,23 @@ public abstract class JsonPushReader implements /*Auto*/Closeable {
     public abstract void accept(JsonVisitor visitor);
 
     /**
-     * TODO shall we add this ? useful esp the reader parses a JSON array
-     *
      * Calls the appropriate visit methods of a specified JSON array visitor.
+     * If it is known in advance that the JSON that is being parsed is an array,
+     * then this method can be used.
      *
      * @param visitor a JSON array visitor
-     *
-    public abstract void accept(JsonArrayVisitor visitor);
      */
+    public abstract void acceptArray(JsonArrayVisitor visitor);
+
 
     /**
-     * TODO shall we add this ? useful esp the reader parses a JSON Object
-     *
      * Calls the appropriate visit methods of a specified JSON object visitor.
+     * If it is known in advance that the JSON that is being parsed is an
+     * object, then this method can be used.
      *
      * @param visitor a JSON object visitor
-     *
-    public abstract void accept(JsonObjectVisitor visitor);
      */
+    public abstract void acceptObject(JsonObjectVisitor visitor);
 
 
     /**
