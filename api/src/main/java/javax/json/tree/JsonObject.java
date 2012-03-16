@@ -42,13 +42,17 @@ package javax.json.tree;
 
 import javax.json.JsonObjectVisitor;
 import javax.json.spi.JsonProvider;
+import java.io.Reader;
 import java.util.*;
 
 /**
- * {@code JsonObject} class represents a JSON object value. It
- * also implements {@link JsonObjectVisitor}, hence an instance can
- * be built by calling the visitor methods. For example, an instance can be
- * built as follows:
+ * {@code JsonObject} class represents a JSON object value.
+ *
+ * <p>
+ * A full JsonObject instance can be created from a character stream using
+ * {@link #create(Reader)}. It can also be built from scratch by calling the
+ * visitor methods since the class implements {@link JsonObjectVisitor}.
+ * For example, an instance can be built as follows:
  *
  * <pre>
  * JsonObject addressObj = ...
@@ -115,6 +119,16 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     }
 
     /**
+     * Creates a JSON object from a character stream
+     *
+     * @param reader a reader from which JSON is to be read     *
+     * @return a JSON object
+     */
+    public static JsonObject create(Reader reader) {
+        return JsonProvider.provider().createObject(reader);
+    }
+
+    /**
      * Makes the specified {@link JsonObjectVisitor} visit this JSON object
      *
      * @param visitor a JSON object value visitor
@@ -130,6 +144,20 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
      *         {@code null} if this object contains no mapping for the name/key
      */
     public abstract JsonValue getValue(String name);
+
+    /**
+     * Returns the value to which the specified name/key is mapped,
+     * or {@code null} if this object contains no mapping for the name/key.
+     *
+     * @param name the name/key whose associated value is to be returned
+     * @param clazz value class
+     * @return the value to which the specified name is mapped, or
+     *         {@code null} if this object contains no mapping for the name/key
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends JsonValue> T getValue(String name, Class<T> clazz) {
+        return (T)getValue(name);
+    }
 
     /**
      * Associates the specified {@link JsonValue} value with the

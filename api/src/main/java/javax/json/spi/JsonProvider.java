@@ -168,6 +168,20 @@ public abstract class JsonProvider {
     public abstract JsonArray createArray();
 
     /**
+     * Creates a JSON array value from a character stream
+     *
+     * @param reader a reader from which JSON is to be read
+     * @return a JSON array
+     */
+    public JsonArray createArray(Reader reader) {
+        JsonPushReader pushReader = JsonPushReader.create(reader);
+        JsonArray jsonArray = JsonArray.create();
+        pushReader.acceptArray(jsonArray);
+        pushReader.close();
+        return jsonArray;
+    }
+
+    /**
      * Creates a JSON null value
      *
      * @return a JSON null
@@ -199,6 +213,20 @@ public abstract class JsonProvider {
      * @return a JSON object
      */
     public abstract JsonObject createObject();
+
+    /**
+     * Creates a JSON object from a character stream
+     *
+     * @param reader a reader from which JSON is to be read     *
+     * @return a JSON object
+     */
+    public JsonObject createObject(Reader reader) {
+        JsonPushReader pushReader = JsonPushReader.create(reader);
+        JsonObject jsonObject = JsonObject.create();
+        pushReader.acceptObject(jsonObject);
+        pushReader.close();
+        return jsonObject;
+    }
 
     /**
      * Creates a JSON true value

@@ -42,14 +42,17 @@ package javax.json.tree;
 
 import javax.json.JsonArrayVisitor;
 import javax.json.spi.JsonProvider;
+import java.io.Reader;
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * {@code JsonArray} class represents a JSON array value. It
- * also implements {@link JsonArrayVisitor}, hence an instance can
- * be built by calling the visitor methods. For example, an instance can be
- * built as follows:
+ * {@code JsonArray} class represents a JSON array value.
+ *
+ * <p>A full JsonArray instance can be created from a character stream using
+ * {@link #create(Reader)}. It can also be built from scratch by calling the
+ * visitor methods since the class implements {@link JsonArrayVisitor}.
+ * For example, an instance can be built as follows:
  *
  * <pre>
  * JsonObject homePhone = ...
@@ -60,7 +63,7 @@ import java.util.List;
  * phoneArray.visitObject(faxPhone);
  * </pre>
  *
- * Convienently, fluent style can be used while building a {@code JsonArray}
+ * Convienently, method chaining can be used while building a {@code JsonArray}
  * instance. For example, an instance can be built as follows:
  * <pre>
  * JsonArray phoneArray = JsonArray.create()
@@ -100,6 +103,16 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
     }
 
     /**
+     * Creates a JSON array value from a character stream
+     *
+     * @param reader a reader from which JSON is to be read
+     * @return a JSON array
+     */
+    public static JsonArray create(Reader reader) {
+        return JsonProvider.provider().createArray(reader);
+    }
+
+    /**
      * Makes the specified {@code JsonArrayVisitor} visit this JSON array
      *
      * @param visitor a JSON array value visitor
@@ -128,6 +141,19 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     public abstract JsonValue getValue(int index);
+
+    /**
+     * Returns the value at the specified position in this JSON array values.
+     *
+     * @param index index of the value to return
+     * @param clazz value class
+     * @return the value at the specified position in this array values
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends JsonValue> T getValue(int index, Class<T> clazz) {
+        return (T)getValue(index);
+    }
 
     /**
      * Replaces the value at the specified position in this JSON array values
