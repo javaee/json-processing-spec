@@ -104,6 +104,10 @@ import java.util.*;
  * <p>
  * TODO 4. define equals() semantics
  *
+ * <p>
+ * TODO 5. Define an iterating order to be predictable like the order in which
+ * name/keys are inserted ?? Will help streaming and testing
+ *
  * @author Jitendra Kotamraju
  */
 public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
