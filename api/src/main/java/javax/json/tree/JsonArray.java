@@ -67,8 +67,8 @@ import java.util.List;
  * instance. For example, an instance can be built as follows:
  * <pre>
  * JsonArray phoneArray = JsonArray.create()
- *      .visitObject(homePhone)
- *      .visitObject(faxPhone);
+ *      .addObject(homePhone)
+ *      .addObject(faxPhone);
  * </pre>
  *
  * {@code JsonArray} can be written to JSON text as follows:
