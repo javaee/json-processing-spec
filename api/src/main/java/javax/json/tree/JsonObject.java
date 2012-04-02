@@ -246,39 +246,6 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
     public abstract JsonObject putNumber(String name, JsonNumber value);
 
     /**
-     * Associates the specified {@link JsonTrue}true value with the
-     * specified name/key in this JSON object. If the object previously
-     * contained a value for the name, the old value is replaced.
-     *
-     * @param name name/key with which the specified value is to be associated
-     * @param value value to be associated with the specified name/key
-     * @return this JSON object
-     */
-    public abstract JsonObject putTrue(String name, JsonTrue value);
-
-    /**
-     * Associates the specified {@link JsonFalse} value with the
-     * specified name/key in this JSON object. If the object previously
-     * contained a value for the name, the old value is replaced.
-     *
-     * @param name name/key with which the specified value is to be associated
-     * @param value value to be associated with the specified name/key
-     * @return this JSON object
-     */
-    public abstract JsonObject putFalse(String name, JsonFalse value);
-
-    /**
-     * Associates the specified {@link JsonNull} value with the
-     * specified name/key in this JSON object. If the object previously
-     * contained a value for the name, the old value is replaced.
-     *
-     * @param name name/key with which the specified value is to be associated
-     * @param value value to be associated with the specified name/key
-     * @return this JSON object
-     */
-    public abstract JsonObject putNull(String name, JsonNull value);
-
-    /**
      * A convenience method for {@link #visitString} that allows
      * method chaining.
      *
@@ -313,7 +280,8 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
      * @see #visitTrue
      */
     public JsonObject putTrue(String name) {
-        return putTrue(name, JsonTrue.JSON_TRUE);
+        putValue(name, JsonValue.TRUE);
+        return this;
     }
 
     /**
@@ -325,7 +293,8 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
      * @see #visitFalse
      */
     public JsonObject putFalse(String name) {
-        return putFalse(name, JsonFalse.JSON_FALSE);
+        putValue(name, JsonValue.FALSE);
+        return this;
     }
 
     /**
@@ -337,7 +306,8 @@ public abstract class JsonObject implements JsonValue, JsonObjectVisitor {
      * @see #visitNull
      */
     public JsonObject putNull(String name) {
-        return putNull(name, JsonNull.JSON_NULL);
+        putValue(name, JsonValue.NULL);
+        return this;
     }
 
     /**

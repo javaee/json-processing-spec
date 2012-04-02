@@ -48,9 +48,7 @@ import java.io.Serializable;
  * @author Jitendra Kotamraju
  */
 public interface JsonValue extends Serializable {
-
-//    public static final JsonValue NULL = new JsonValue();
-//    public static final JsonValue TRUE = new JsonValue();
-//    public static final JsonValue FALSE = new JsonValue();
-
+    public static final JsonValue NULL = new JsonValue() {};
+    public static final JsonValue TRUE = new JsonValue() {};
+    public static final JsonValue FALSE = new JsonValue() {};
 }

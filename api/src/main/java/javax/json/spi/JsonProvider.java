@@ -67,7 +67,6 @@ public abstract class JsonProvider {
      * A constant representing the name of the default
      * <code>Provider</code> implementation class.
      **/
-    // Using two strings so that package renaming doesn't change it
     static final String DEFAULT_JSON_PROVIDER
             = "org.glassfish.json.GlassFishJsonProvider";
 
@@ -182,13 +181,6 @@ public abstract class JsonProvider {
     }
 
     /**
-     * Creates a JSON null value
-     *
-     * @return a JSON null
-     */
-    public abstract JsonNull createNull();
-
-    /**
      * Creates a {@code JsonNumber} for the specified JSON number value
      *
      * @param value JSON number value. Its type must be one of : {@code Byte},
@@ -228,17 +220,4 @@ public abstract class JsonProvider {
         return jsonObject;
     }
 
-    /**
-     * Creates a JSON true value
-     *
-     * @return a JSON true
-     */
-    public abstract JsonTrue createTrue();
-
-    /**
-     * Creates a JSON false value
-     *
-     * @return a JSON false
-     */
-    public abstract JsonFalse createFalse();
 }

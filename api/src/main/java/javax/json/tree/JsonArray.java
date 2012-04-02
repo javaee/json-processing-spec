@@ -204,32 +204,6 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
      */
     public abstract JsonArray addObject(JsonObject value);
 
-    /**
-     * Appends the specified {@code JsonTrue} value to the end of this array
-     * values
-     *
-     * @param value JsonTrue value
-     * @return this JSON array
-     */
-    public abstract JsonArray addTrue(JsonTrue value);
-
-    /**
-     * Appends the specified {@code JsonFalse} value to the end of this array
-     * values
-     *
-     * @param value a JsonFalse value
-     * @return this JSON array
-     */
-    public abstract JsonArray addFalse(JsonFalse value);
-
-    /**
-     * Appends the specified {@code JsonNull} value to the end of this array
-     * values
-     *
-     * @param value a JsonNull value
-     * @return this JSON array
-     */
-    public abstract JsonArray addNull(JsonNull value);
 
     /**
      * Appends the specified {@code JsonString} value to the end of this array
@@ -283,7 +257,8 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
      * @see #visitTrue
      */
     public JsonArray addTrue() {
-        return addTrue(JsonTrue.JSON_TRUE);
+        addValue(JsonValue.TRUE);
+        return this;
     }
 
     /**
@@ -294,7 +269,8 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
      * @see #visitFalse
      */
     public JsonArray addFalse() {
-        return addFalse(JsonFalse.JSON_FALSE);
+        addValue(JsonValue.FALSE);
+        return this;
     }
 
     /**
@@ -305,7 +281,8 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
      * @see #visitNull
      */
     public JsonArray addNull() {
-        return addNull(JsonNull.JSON_NULL);
+        addValue(JsonValue.NULL);
+        return this;
     }
 
     /**
