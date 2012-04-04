@@ -40,10 +40,12 @@
 
 package javax.json.stream;
 
-import javax.json.JsonObjectVisitor;
 import javax.json.JsonVisitor;
 import javax.json.spi.JsonProvider;
+import javax.json.tree.JsonArrayBuilder;
+import javax.json.tree.JsonObjectBuilder;
 import java.io.Closeable;
+import java.io.StringWriter;
 import java.io.Writer;
 
 /**
@@ -86,7 +88,7 @@ import java.io.Writer;
  *
  * @author Jitendra Kotamraju
  */
-public abstract class JsonWriter implements JsonVisitor, /*Auto*/Closeable {
+public abstract class JsonGenerator implements JsonVisitor, /*Auto*/Closeable {
 
     /**
      * Creates a JSON writer which can be used to write JSON text to the
@@ -95,9 +97,20 @@ public abstract class JsonWriter implements JsonVisitor, /*Auto*/Closeable {
      * @param writer to which data is written
      * @return a JSON writer
      */
-    public static JsonWriter create(Writer writer) {
+    public static JsonGenerator create(Writer writer) {
         return JsonProvider.provider().createJsonWriter(writer);
     }
+
+    /**
+     * Starts writing of a JSON object in a streaming fashion.
+     */
+    public JsonObjectBuilder<Closeable> beginObject() { return null; }
+
+    /**
+     * Starts writing of a JSON array in a streaming fashion.
+     */
+    public JsonArrayBuilder<Closeable> beginArray() { return null; }
+
 
 /*
     TODO will the following any useful ?
@@ -117,5 +130,33 @@ public abstract class JsonWriter implements JsonVisitor, /*Auto*/Closeable {
      */
     @Override
     public abstract void close();
+
+    private void test() {
+        JsonGenerator generator = JsonGenerator.create(new StringWriter());
+        generator
+            .beginObject()
+                .add("firstName", "John")
+                .add("lastName", "Smith")
+                .add("age", 25)
+                .beginObject("address")
+                    .add("streetAddress", "21 2nd Street")
+                    .add("city", "New York")
+                    .add("state", "NY")
+                    .add("postalCode", "10021")
+                .endObject()
+                .beginArray("phoneNumber")
+                    .beginObject()
+                        .add("type", "home")
+                        .add("number", "212 555-1234")
+                    .endObject()
+                    .beginObject()
+                        .add("type", "fax")
+                        .add("number", "646 555-4567")
+                    .endObject()
+                .endArray()
+            .endObject();
+
+        generator.close();
+    }
 
 }

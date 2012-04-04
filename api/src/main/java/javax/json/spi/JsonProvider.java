@@ -41,9 +41,9 @@
 package javax.json.spi;
 
 import javax.json.JsonException;
-import javax.json.stream.JsonPullReader;
-import javax.json.stream.JsonPushReader;
-import javax.json.stream.JsonWriter;
+import javax.json.stream.JsonPullParser;
+import javax.json.stream.JsonPushParser;
+import javax.json.stream.JsonGenerator;
 import javax.json.tree.*;
 import java.io.Reader;
 import java.io.Writer;
@@ -125,7 +125,7 @@ public abstract class JsonProvider {
      * @param writer to which data is written
      * @return a JSON writer
      */
-    public abstract JsonWriter createJsonWriter(Writer writer);
+    public abstract JsonGenerator createJsonWriter(Writer writer);
 
     /**
      * Creates a JSON pull reader
@@ -133,7 +133,7 @@ public abstract class JsonProvider {
      * @param reader a reader from which JSON is to be read
      * @return a JSON pull reader
      */
-    public abstract JsonPullReader createJsonPullReader(Reader reader);
+    public abstract JsonPullParser createJsonPullReader(Reader reader);
 
     /**
      * Creates a JSON push reader
@@ -141,7 +141,7 @@ public abstract class JsonProvider {
      * @param reader from which JSON is read
      * @return a JSON push reader
      */
-    public abstract JsonPushReader createJsonPushReader(Reader reader);
+    public abstract JsonPushParser createJsonPushReader(Reader reader);
 
     /**
      * Creates a JSON reader from array
@@ -149,7 +149,7 @@ public abstract class JsonProvider {
      * @param array a JSON array
      * @return a JSON pull reader
      */
-    public abstract JsonPullReader createJsonPullReader(JsonArray array);
+    public abstract JsonPullParser createJsonPullReader(JsonArray array);
 
     /**
      * Creates a JSON pull reader from a JSON object
@@ -157,7 +157,7 @@ public abstract class JsonProvider {
      * @param object a JSON object
      * @return a JSON pull reader
      */
-    public abstract JsonPullReader createJsonPullReader(JsonObject object);
+    public abstract JsonPullParser createJsonPullReader(JsonObject object);
 
     /**
      * Creates a JSON array value
@@ -172,13 +172,7 @@ public abstract class JsonProvider {
      * @param reader a reader from which JSON is to be read
      * @return a JSON array
      */
-    public JsonArray createArray(Reader reader) {
-        JsonPushReader pushReader = JsonPushReader.create(reader);
-        JsonArray jsonArray = JsonArray.create();
-        pushReader.acceptArray(jsonArray);
-        pushReader.close();
-        return jsonArray;
-    }
+    public abstract JsonArray createArray(Reader reader);
 
     /**
      * Creates a {@code JsonNumber} for the specified JSON number value
@@ -212,12 +206,6 @@ public abstract class JsonProvider {
      * @param reader a reader from which JSON is to be read     *
      * @return a JSON object
      */
-    public JsonObject createObject(Reader reader) {
-        JsonPushReader pushReader = JsonPushReader.create(reader);
-        JsonObject jsonObject = JsonObject.create();
-        pushReader.acceptObject(jsonObject);
-        pushReader.close();
-        return jsonObject;
-    }
+    public abstract JsonObject createObject(Reader reader);
 
 }

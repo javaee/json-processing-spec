@@ -47,7 +47,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * {@code JsonArray} class represents a JSON array value.
+ * {@code JsonArray} class represents an immutable JSON array value.
  *
  * <p>A full JsonArray instance can be created from a character stream using
  * {@link #create(Reader)}. It can also be built from scratch by calling the
@@ -89,18 +89,10 @@ import java.util.List;
  */
 // TODO Should we extend with List<JsonValue>. That means tying with a contract
 // TODO and need to implement some not needed methods
-public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonArrayVisitor {
+public abstract class JsonArray implements JsonValue, Iterable<JsonValue> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Creates a JSON array
-     *
-     * @return a JsonArray
-     */
-    public static JsonArray create() {
-        return JsonProvider.provider().createArray();
-    }
 
     /**
      * Creates a JSON array value from a character stream
@@ -127,7 +119,7 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
     public abstract Iterator<JsonValue> getValues();
 
     /**
-     * Returns a list of this JSON array values
+     * Returns an unmodifiable list of this JSON array values
      *
      * @return a list of array values
      */
@@ -155,183 +147,4 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue>, JsonA
         return (T)getValue(index);
     }
 
-    /**
-     * Replaces the value at the specified position in this JSON array values
-     * with the specified value
-     *
-     * @param index index of the value to replace
-     * @param value value to be stored at the specified position
-     * @throws IndexOutOfBoundsException if the index is out of range
-     */
-    public abstract void setValue(int index, JsonValue value);
-
-    /**
-     * Removes the value at the specified position in this JSON array values.
-     * Shifts any subsequent values to the left (subtracts one
-     * from their indices).  Returns the value that was removed from the
-     * array values.
-     *
-     * @param index the index of the element to be removed
-     * @return the value previously at the specified position
-     * @throws IndexOutOfBoundsException if the index is out of range
-     */
-    public abstract JsonValue removeValue(int index);
-
-    /**
-     * Appends the specified {@code JsonValue} value to the end of this array
-     * values
-     *
-     * @param value a JsonValue value
-     * @return this JSON array
-     */
-    public abstract void addValue(JsonValue value);
-
-    /**
-     * Appends the specified {@code JsonArray} value to the end of this array
-     * values
-     *
-     * @param value a JsonArray value
-     * @return this JSON array
-     */
-    public abstract JsonArray addArray(JsonArray value);
-
-    /**
-     * Appends the specified {@code JsonObject} value to the end of this array
-     * values
-     *
-     * @param value a JsonObject value
-     * @return this JSON array
-     */
-    public abstract JsonArray addObject(JsonObject value);
-
-
-    /**
-     * Appends the specified {@code JsonString} value to the end of this array
-     * values
-     *
-     * @param value a JsonString value
-     * @return this JSON array
-     */
-    public abstract JsonArray addString(JsonString value);
-
-    /**
-     * Appends the specified {@code JsonNumber} value to the end of this array
-     * values
-     *
-     * @param value a JsonNumber value
-     * @return this JSON array
-     */
-    public abstract JsonArray addNumber(JsonNumber value);
-
-    /**
-     * A convenience method for {@link #visitString} that allows
-     * method chaining.
-     *
-     * @param value a JSON string value
-     * @return this JSON array
-     * @see #visitString
-     */
-    public JsonArray addString(String value) {
-        JsonString string = JsonString.create(value);
-        return addString(string);
-    }
-
-    /**
-     * A convenience method for {@link #visitNumber} that allows
-     * method chaining.
-     *
-     * @param value a JSON number value
-     * @return this JSON array
-     * @see #visitNumber
-     */
-    public JsonArray addNumber(Number value) {
-        JsonNumber number = JsonNumber.create(value);
-        return addNumber(number);
-    }
-
-    /**
-     * A convenience method for {@link #visitTrue} that allows
-     * method chaining.
-     *
-     * @return this JSON array
-     * @see #visitTrue
-     */
-    public JsonArray addTrue() {
-        addValue(JsonValue.TRUE);
-        return this;
-    }
-
-    /**
-     * A convenience method for {@link #visitFalse} that allows
-     * method chaining.
-     *
-     * @return this JSON array
-     * @see #visitFalse
-     */
-    public JsonArray addFalse() {
-        addValue(JsonValue.FALSE);
-        return this;
-    }
-
-    /**
-     * A convenience method for {@link #visitNull} that allows
-     * method chaining.
-     *
-     * @return this JSON array
-     * @see #visitNull
-     */
-    public JsonArray addNull() {
-        addValue(JsonValue.NULL);
-        return this;
-    }
-
-    /**
-     * Appends a JSON string value to the end of this array values
-     *
-     * @param value a JSON string value
-     */
-    @Override
-    public void visitString(String value) {
-        addString(value);
-    }
-
-    /**
-     * Appends a JSON number value to the end of this array values
-     *
-     * @param value a JSON number value
-     */
-    @Override
-    public void visitNumber(Number value) {
-        addNumber(value);
-    }
-
-    /**
-     * Appends a JSON true value to the end of this array values
-     */
-    @Override
-    public void visitTrue() {
-        addTrue();
-    }
-
-    /**
-     * Appends a JSON false value to the end of this array values
-     */
-    @Override
-    public void visitFalse() {
-        addFalse();
-    }
-
-    /**
-     * Appends a JSON null value to the end of this array values
-     */
-    @Override
-    public void visitNull() {
-        addNull();
-    }
-
-    /**
-     * Removes all the values from this JSON array.
-     * The array will be empty after this call returns.
-     */
-    public abstract void clear();
 }

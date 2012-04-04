@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2011-2012 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2011 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -38,17 +38,11 @@
  * holder.
  */
 
-package javax.json.tree;
-
-import java.io.Serializable;
+package javax.json;
 
 /**
- * <code>JsonValue</code> represents a JSON value
- *
  * @author Jitendra Kotamraju
  */
-public interface JsonValue {
-    public static final JsonValue NULL = new JsonValue() {};
-    public static final JsonValue TRUE = new JsonValue() {};
-    public static final JsonValue FALSE = new JsonValue() {};
+public enum JsonNumberType {
+    INT, LONG, BIG_INTEGER, DOUBLE, BIG_DECIMAL
 }

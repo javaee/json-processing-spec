@@ -110,7 +110,7 @@ import java.io.Reader;
  *
  * <p> TODO Create event objects - Improves type safety, but what about performance ?
  */
-public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, /*Auto*/Closeable {
+public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, /*Auto*/Closeable {
     /**
      * Event for parser state while parsing the JSON
      */
@@ -199,7 +199,7 @@ public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, 
      * @param reader a reader from which JSON is to be read
      * @return a JSON pull reader
      */
-    public static JsonPullReader create(Reader reader) {
+    public static JsonPullParser create(Reader reader) {
         return JsonProvider.provider().createJsonPullReader(reader);
     }
 
@@ -209,7 +209,7 @@ public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, 
      * @param array a JSON array
      * @return a JSON pull reader
      */
-    public static JsonPullReader create(JsonArray array) {
+    public static JsonPullParser create(JsonArray array) {
         return JsonProvider.provider().createJsonPullReader(array);
     }
 
@@ -219,7 +219,7 @@ public abstract class JsonPullReader implements Iterable<JsonPullReader.Event>, 
      * @param object a JSON object
      * @return a JSON pull reader
      */
-    public static JsonPullReader create(JsonObject object) {
+    public static JsonPullParser create(JsonObject object) {
         return JsonProvider.provider().createJsonPullReader(object);
     }
 }

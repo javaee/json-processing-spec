@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2011-2012 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2011 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -40,15 +40,38 @@
 
 package javax.json.tree;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
- * <code>JsonValue</code> represents a JSON value
- *
  * @author Jitendra Kotamraju
+ * @see JsonBuilder
  */
-public interface JsonValue {
-    public static final JsonValue NULL = new JsonValue() {};
-    public static final JsonValue TRUE = new JsonValue() {};
-    public static final JsonValue FALSE = new JsonValue() {};
+public interface JsonArrayBuilder<T> {
+    public T endArray();
+
+    public JsonArrayBuilder<T> add(JsonValue value);
+
+    public JsonArrayBuilder<T> add(String value);
+
+    public JsonArrayBuilder<T> add(BigDecimal value);
+
+    public JsonArrayBuilder<T> add(BigInteger value);
+
+    public JsonArrayBuilder<T> add(int value);
+
+    public JsonArrayBuilder<T> add(long value);
+
+    public JsonArrayBuilder<T> add(double value);
+
+    public JsonArrayBuilder<T> add(boolean value);
+
+    public JsonArrayBuilder<T> addNull();
+
+    public JsonArrayBuilder<T> addArray(Iterable<JsonValue> values);
+
+    public JsonObjectBuilder<JsonArrayBuilder<T>> beginObject();
+
+    public JsonArrayBuilder<JsonArrayBuilder<T>> beginArray();
+
 }

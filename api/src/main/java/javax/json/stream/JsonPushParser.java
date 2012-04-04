@@ -70,7 +70,7 @@ import java.io.Reader;
  *
  * @author Jitendra Kotamraju
  */
-public abstract class JsonPushReader implements /*Auto*/Closeable {
+public abstract class JsonPushParser implements /*Auto*/Closeable {
 
     /**
      * Creates a JSON reader which can be used to parse JSON.
@@ -78,7 +78,7 @@ public abstract class JsonPushReader implements /*Auto*/Closeable {
      * @param reader from which JSON is read
      * @return a JSON reader
      */
-    public static JsonPushReader create(Reader reader) {
+    public static JsonPushParser create(Reader reader) {
         return JsonProvider.provider().createJsonPushReader(reader);
     }
 
