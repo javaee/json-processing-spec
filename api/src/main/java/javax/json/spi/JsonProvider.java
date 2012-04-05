@@ -133,7 +133,7 @@ public abstract class JsonProvider {
      * @param reader a reader from which JSON is to be read
      * @return a JSON pull reader
      */
-    public abstract JsonPullParser createJsonPullReader(Reader reader);
+    public abstract JsonPullParser createJsonPullParser(Reader reader);
 
     /**
      * Creates a JSON push reader
@@ -141,7 +141,7 @@ public abstract class JsonProvider {
      * @param reader from which JSON is read
      * @return a JSON push reader
      */
-    public abstract JsonPushParser createJsonPushReader(Reader reader);
+    public abstract JsonPushParser createJsonPushParser(Reader reader);
 
     /**
      * Creates a JSON reader from array
@@ -149,7 +149,7 @@ public abstract class JsonProvider {
      * @param array a JSON array
      * @return a JSON pull reader
      */
-    public abstract JsonPullParser createJsonPullReader(JsonArray array);
+    public abstract JsonPullParser createJsonPullParser(JsonArray array);
 
     /**
      * Creates a JSON pull reader from a JSON object
@@ -157,14 +157,7 @@ public abstract class JsonProvider {
      * @param object a JSON object
      * @return a JSON pull reader
      */
-    public abstract JsonPullParser createJsonPullReader(JsonObject object);
-
-    /**
-     * Creates a JSON array value
-     *
-     * @return a JSON array
-     */
-    public abstract JsonArray createArray();
+    public abstract JsonPullParser createJsonPullParser(JsonObject object);
 
     /**
      * Creates a JSON array value from a character stream
@@ -174,31 +167,6 @@ public abstract class JsonProvider {
      */
     public abstract JsonArray createArray(Reader reader);
 
-    /**
-     * Creates a {@code JsonNumber} for the specified JSON number value
-     *
-     * @param value JSON number value. Its type must be one of : {@code Byte},
-     * {@code Short}, {@code Integer}, {@code Long}, {@code Float},
-     * {@code Double}, {@code BigInteger} and {@code BigDecimal}.
-     * @return a JSON number value
-     */
-    public abstract JsonNumber createNumber(Number value);
-
-
-    /**
-     * Creates a {@code JsonString} for the specified JSON string value
-     *
-     * @param value JSON string value
-     * @return a JsonString
-     */
-    public abstract JsonString createString(String value);
-
-    /**
-     * Creates a JSON object
-     *
-     * @return a JSON object
-     */
-    public abstract JsonObject createObject();
 
     /**
      * Creates a JSON object from a character stream

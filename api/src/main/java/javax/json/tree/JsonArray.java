@@ -91,8 +91,6 @@ import java.util.List;
 // TODO and need to implement some not needed methods
 public abstract class JsonArray implements JsonValue, Iterable<JsonValue> {
 
-    private static final long serialVersionUID = 1L;
-
 
     /**
      * Creates a JSON array value from a character stream

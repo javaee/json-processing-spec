@@ -48,7 +48,27 @@ import java.io.Serializable;
  * @author Jitendra Kotamraju
  */
 public interface JsonValue {
-    public static final JsonValue NULL = new JsonValue() {};
-    public static final JsonValue TRUE = new JsonValue() {};
-    public static final JsonValue FALSE = new JsonValue() {};
+
+    public static final JsonValue NULL = new JsonValue() {
+        @Override
+        public JsonValueType getValueType() {
+            return JsonValueType.NULL;
+        }
+    };
+
+    public static final JsonValue TRUE = new JsonValue() {
+        @Override
+        public JsonValueType getValueType() {
+            return JsonValueType.TRUE;
+        }
+    };
+
+    public static final JsonValue FALSE = new JsonValue() {
+        @Override
+        public JsonValueType getValueType() {
+            return JsonValueType.FALSE;
+        }
+    };
+
+    public JsonValueType getValueType();
 }

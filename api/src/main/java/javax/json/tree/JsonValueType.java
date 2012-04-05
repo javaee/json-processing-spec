@@ -38,11 +38,11 @@
  * holder.
  */
 
-package javax.json;
+package javax.json.tree;
 
 /**
  * @author Jitendra Kotamraju
  */
 public enum JsonValueType {
-    ARRAY, OBJECT, STRING, NUMBER, BOOLEAN, NULL
+    ARRAY, OBJECT, STRING, NUMBER, TRUE, FALSE, NULL
 }

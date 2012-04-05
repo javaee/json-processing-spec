@@ -42,6 +42,7 @@ package javax.json.stream;
 
 import javax.json.spi.JsonProvider;
 import javax.json.tree.JsonArray;
+import javax.json.tree.JsonNumber;
 import javax.json.tree.JsonObject;
 import java.io.Closeable;
 import java.io.Reader;
@@ -53,7 +54,7 @@ import java.io.Reader;
  * methods.
  * 
  * <p>
- * A JsonPullReader is used to parse JSON in a pull manner by calling
+ * A JsonPullParser is used to parse JSON in a pull manner by calling
  * its iterator methods. The iterator's {@code next()} method causes the reader
  * to read the next parse event.
  * <p>
@@ -110,7 +111,7 @@ import java.io.Reader;
  *
  * <p> TODO Create event objects - Improves type safety, but what about performance ?
  */
-public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, /*Auto*/Closeable {
+public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, JsonNumber, /*Auto*/Closeable {
     /**
      * Event for parser state while parsing the JSON
      */
@@ -138,7 +139,7 @@ public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, 
         /**
          * Event for a number value. This event indicates a number value in
          * an array or object is parsed. The number value itself can be
-         * accessed using {@link #getNumber}
+         * accessed using {@link JsonNumber} methods
          */
         VALUE_NUMBER,
         /**
@@ -176,15 +177,6 @@ public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, 
      */
     public abstract String getString();
 
-    /**
-     * Returns a JSON number when the state is {@link Event#VALUE_NUMBER}
-     *
-     * @return a number
-     * @throws IllegalStateException when the state is not VALUE_NUMBER
-     *
-     * <p>TODO Number type based on the precision ??
-     */
-    public abstract Number getNumber();
 
     /**
      * Closes this reader and frees any resources associated with the
@@ -200,7 +192,7 @@ public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, 
      * @return a JSON pull reader
      */
     public static JsonPullParser create(Reader reader) {
-        return JsonProvider.provider().createJsonPullReader(reader);
+        return JsonProvider.provider().createJsonPullParser(reader);
     }
 
     /**
@@ -210,7 +202,7 @@ public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, 
      * @return a JSON pull reader
      */
     public static JsonPullParser create(JsonArray array) {
-        return JsonProvider.provider().createJsonPullReader(array);
+        return JsonProvider.provider().createJsonPullParser(array);
     }
 
     /**
@@ -220,6 +212,6 @@ public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, 
      * @return a JSON pull reader
      */
     public static JsonPullParser create(JsonObject object) {
-        return JsonProvider.provider().createJsonPullReader(object);
+        return JsonProvider.provider().createJsonPullParser(object);
     }
 }

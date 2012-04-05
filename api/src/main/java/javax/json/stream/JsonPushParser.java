@@ -79,7 +79,7 @@ public abstract class JsonPushParser implements /*Auto*/Closeable {
      * @return a JSON reader
      */
     public static JsonPushParser create(Reader reader) {
-        return JsonProvider.provider().createJsonPushReader(reader);
+        return JsonProvider.provider().createJsonPushParser(reader);
     }
 
     /**

@@ -47,24 +47,13 @@ import javax.json.spi.JsonProvider;
  *
  * @author Jitendra Kotamraju
  */
-public abstract class JsonString implements JsonValue {
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Creates a {@code JsonString} for the specified JSON string value
-     *
-     * @param value JSON string value
-     * @return a JsonString
-     */
-    public static JsonString create(String value) {
-        return JsonProvider.provider().createString(value);
-    }
+public interface JsonString extends JsonValue {
 
     /**
      * Returns the JSON string value
      *
      * @return a JSON string value
      */
-    public abstract String getValue();
+    public String getValue();
 
 }

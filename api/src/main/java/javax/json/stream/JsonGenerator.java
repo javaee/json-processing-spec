@@ -49,28 +49,37 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 /**
- * A JSON generator. It is also a {@code JsonVisitor} and its visit methods
- * are called to generate JSON. For example:
+ * A streaming JSON generator.
+ *
+ * <p>
+ * For example:
  *
  * <code>
  * <pre>
- * JsonWriter writer = JsonWriter.create(...);
- * JsonObjectVisitor personWriter = writer.visitObject();
- * personWriter.visitString("firstName", "John");
- * personWriter.visitString("lastName", "Smith");
- * personWriter.visitNumber("age", 25);
- * JsonArrayVisitor phoneWriter = personWriter.visitArray("phoneNumber");
- * JsonObjectVisitor homePhoneWriter = phoneWriter.visitObject();
- * homePhoneWriter.visitString("type", "home");
- * homePhoneWriter.visitString("number", "212 555-1234");
- * homePhoneWriter.visitEnd();
- * JsonObjectVisitor faxPhoneWriter = phoneWriter.visitObject();
- * faxPhoneWriter.visitString("type", "fax");
- * faxPhoneWriter.visitString("number", "646 555-4567");
- * faxPhoneWriter.visitEnd();
- * phoneWriter.visitEnd();
- * personWriter.visitEnd();
- * writer.close();
+ * JsonGenerator generator = JsonGenerator.create(...);
+ * generator
+ *     .beginObject()
+ *         .add("firstName", "John")
+ *         .add("lastName", "Smith")
+ *         .add("age", 25)
+ *         .beginObject("address")
+ *             .add("streetAddress", "21 2nd Street")
+ *             .add("city", "New York")
+ *             .add("state", "NY")
+ *             .add("postalCode", "10021")
+ *         .endObject()
+ *         .beginArray("phoneNumber")
+ *             .beginObject()
+ *                 .add("type", "home")
+ *                 .add("number", "212 555-1234")
+ *             .endObject()
+ *             .beginObject()
+ *                 .add("type", "fax")
+ *                 .add("number", "646 555-4567")
+ *             .endObject()
+ *         .endArray()
+ *     .endObject();
+ * generator.close();
  *
  * would produce a JSON equivalent to the following:
  * {
@@ -84,11 +93,9 @@ import java.io.Writer;
  * </pre>
  * </code>
  *
- * TODO should we add convenience methods with method chaining ?
- *
  * @author Jitendra Kotamraju
  */
-public abstract class JsonGenerator implements JsonVisitor, /*Auto*/Closeable {
+public abstract class JsonGenerator implements /*Auto*/Closeable {
 
     /**
      * Creates a JSON writer which can be used to write JSON text to the
@@ -110,18 +117,6 @@ public abstract class JsonGenerator implements JsonVisitor, /*Auto*/Closeable {
      * Starts writing of a JSON array in a streaming fashion.
      */
     public JsonArrayBuilder<Closeable> beginArray() { return null; }
-
-
-/*
-    TODO will the following any useful ?
-
-    public static JsonObjectVisitor createObject(Writer writer) {
-        return JsonProvider.provider().createJsonWriter(writer).visitObject();
-    }
-    public static JsonArrayVisitor createArray(Writer writer) {
-        return JsonProvider.provider().createJsonWriter(writer).visitArray();
-    }
-*/
 
 
     /**

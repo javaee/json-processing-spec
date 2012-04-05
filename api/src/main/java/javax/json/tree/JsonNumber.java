@@ -40,32 +40,89 @@
 
 package javax.json.tree;
 
-import javax.json.spi.JsonProvider;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * <code>JsonNumber</code> represents a JSON number value.
  *
  * @author Jitendra Kotamraju
  */
-public abstract class JsonNumber implements JsonValue {
-    private static final long serialVersionUID = 1L;
+public interface JsonNumber extends JsonValue {
 
     /**
-     * Creates a {@code JsonNumber} for the specified JSON number value
+     * Returns a JSON number type
      *
-     * @param value JSON number value. Its type must be one of : {@code Byte},
-     * {@code Short}, {@code Integer}, {@code Long}, {@code Float},
-     * {@code Double}, {@code BigInteger} and {@code BigDecimal}.
-     * @return a JSON number value
+     * @return a number type
      */
-    public static JsonNumber create(Number value) {
-        return JsonProvider.provider().createNumber(value);
-    }
+    public JsonNumberType getNumberType();
 
     /**
-     * Returns the JSON number value
+     * Converts JSON number to an integer number. Note that this conversion
+     * can lose information about the overall magnitude and precision of the
+     * number value as well as return a result with the opposite sign.
      *
-     * @return a JSON number value
+     * @return an integer for JSON number.
      */
-    public abstract Number getValue();
+    public int getIntValue();
+
+    /**
+     * Converts JSON number to an integer number.
+     *
+     * @return a number type
+     * @throws javax.json.JsonException when number will not fit in an {@code int}.
+     */
+    public int getIntValueExact();
+
+    /**
+     * Converts JSON number to a long number. Note that this conversion
+     * can lose information about the overall magnitude and precision of the
+     * number value as well as return a result with the opposite sign.
+     *
+     * @return a long for JSON number.
+     */
+    public long getLongValue();
+
+    /**
+     * Converts JSON number to a long number.
+     *
+     * @return a long for JSON number
+     * @throws javax.json.JsonException when number will not fit in a {@code long}.
+     */
+    public long  getLongValueExact();
+
+    /**
+     * Converts JSON number to a {@code BigInteger} number. Note that this
+     * conversion can lose information about the overall magnitude and
+     * precision of the number value as well as return a result with the
+     * opposite sign.
+     *
+     * @return a long for JSON number.
+     */
+    public BigInteger bigIntegerValue();
+
+    /**
+     * Converts JSON number to a {@code BigDecimal} number.
+     *
+     * @return a BigDecimal for JSON number
+     * @throws javax.json.JsonException when number will not fit in a {@code BigDecimal}.
+     */
+    public BigInteger bigIntegerValueExact();
+
+    /**
+     * Converts JSON number to a double number. Note that this conversion
+     * can lose information about the overall magnitude and precision of the
+     * number value as well as return a result with the opposite sign.
+     *
+     * @return a long for JSON number
+     */
+    public double doubleValue();
+
+    /**
+     * Converts JSON number to a {@code BigDecimal}
+     *
+     * @return a BigDecimal for JSON number
+     */
+    public BigDecimal bigDecimalValue();
+
 }
