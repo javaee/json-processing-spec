@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2011-2012 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -38,11 +38,20 @@
  * holder.
  */
 
-package javax.json.tree;
+package javax.json;
 
 /**
+ * {@code JsonString} represents a JSON string value
+ *
  * @author Jitendra Kotamraju
  */
-public interface JsonBuilderBase<T> {
-    public T build();
+public interface JsonString extends JsonValue {
+
+    /**
+     * Returns the JSON string value
+     *
+     * @return a JSON string value
+     */
+    public String getValue();
+
 }

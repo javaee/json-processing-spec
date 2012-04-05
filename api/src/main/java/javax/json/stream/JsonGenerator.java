@@ -40,10 +40,8 @@
 
 package javax.json.stream;
 
-import javax.json.JsonVisitor;
-import javax.json.spi.JsonProvider;
-import javax.json.tree.JsonArrayBuilder;
-import javax.json.tree.JsonObjectBuilder;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import java.io.Closeable;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -95,7 +93,7 @@ import java.io.Writer;
  *
  * @author Jitendra Kotamraju
  */
-public abstract class JsonGenerator implements /*Auto*/Closeable {
+public class JsonGenerator implements /*Auto*/Closeable {
 
     /**
      * Creates a JSON writer which can be used to write JSON text to the
@@ -104,8 +102,7 @@ public abstract class JsonGenerator implements /*Auto*/Closeable {
      * @param writer to which data is written
      * @return a JSON writer
      */
-    public static JsonGenerator create(Writer writer) {
-        return JsonProvider.provider().createJsonWriter(writer);
+    public JsonGenerator (Writer writer) {
     }
 
     /**
@@ -120,14 +117,15 @@ public abstract class JsonGenerator implements /*Auto*/Closeable {
 
 
     /**
-     * Closes this writer and frees any resources associated with the
-     * writer. This doesn't close the underlying output source.
+     * Closes this generator and frees any resources associated with the
+     * generator. This doesn't close the underlying output source.
      */
     @Override
-    public abstract void close();
+    public void close() {
+    }
 
     private void test() {
-        JsonGenerator generator = JsonGenerator.create(new StringWriter());
+        JsonGenerator generator = new JsonGenerator(new StringWriter());
         generator
             .beginObject()
                 .add("firstName", "John")

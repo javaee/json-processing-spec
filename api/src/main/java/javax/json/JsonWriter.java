@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2011-2012 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2011 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -38,22 +38,56 @@
  * holder.
  */
 
-package javax.json.tree;
+package javax.json;
 
-import javax.json.spi.JsonProvider;
+import java.io.Closeable;
+import java.io.StringWriter;
+import java.io.Writer;
 
 /**
- * {@code JsonString} represents a JSON string value
- *
+ * <code>
+ * <pre>
+ * JsonWriter jsonWriter = new JsonWriter(...);
+ * jsonWriter.writeObject(new JsonBuilder().beginObject().endObject().build());
+ * jsonWriter.close();
+ * </pre>
+ * </code>
  * @author Jitendra Kotamraju
  */
-public interface JsonString extends JsonValue {
+public class JsonWriter implements /*Auto*/Closeable {
+
+    private final Writer writer;
+
+    public JsonWriter(Writer writer) {
+        this.writer = writer;
+    }
+
+    public void writeArray(JsonArray value) {
+    }
+
+    public void writeObject(JsonObject value) {
+    }
 
     /**
-     * Returns the JSON string value
-     *
-     * @return a JSON string value
+     * Closes this JSON writer and frees any resources associated with the
+     * writer. This doesn't close the underlying output source.
      */
-    public String getValue();
+    @Override
+    public void close() {
+    }
+
+    private void test() throws Exception {
+        Writer writer = new StringWriter();
+        JsonWriter jsonWriter = new JsonWriter(writer);
+        jsonWriter.writeObject(new JsonBuilder().beginObject().endObject().build());
+        jsonWriter.close();
+        writer.close();
+
+        writer = new StringWriter();
+        jsonWriter = new JsonWriter(writer);
+        jsonWriter.writeArray(new JsonBuilder().beginArray().endArray().build());
+        jsonWriter.close();
+        writer.close();
+    }
 
 }

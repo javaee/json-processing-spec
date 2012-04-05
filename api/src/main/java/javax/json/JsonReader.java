@@ -38,41 +38,64 @@
  * holder.
  */
 
-package javax.json.tree;
+package javax.json;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.io.Closeable;
+import java.io.Reader;
+import java.io.StringReader;
 
 /**
+ * A JSON reader
+ *
+ * <code>
+ * <pre>
+ * JsonReader jsonReader = new JsonReader(new StringReader("[]"));
+ * JsonValue value = jsonReader.readObject();
+ * jsonReader.close();
+ * </pre>
+ * </code>
+ *
  * @author Jitendra Kotamraju
- * @see JsonBuilder
  */
-public interface JsonObjectBuilder<T> {
+public class JsonReader implements /*Auto*/Closeable {
 
-    public T endObject();
+    /**
+     * Creates a JSON reader from a character stream
+     *
+     * @param reader a reader from which JSON is to be read
+     * @return a JSON reader
+     */
+    public JsonReader(Reader reader) {
+    }
 
-    public JsonObjectBuilder<T> add(String name, JsonValue value);
+    /**
+     * Returns a JSON array or object that is represented in
+     * the character stream
+     *
+     * @return a JSON array or object
+     */
+    public JsonValue readObject() {
+        return null;
+    }
 
-    public JsonObjectBuilder<T> add(String name, String value);
+    /**
+     * Closes this reader and frees any resources associated with the
+     * reader. This doesn't close the underlying input source.
+     */
+    @Override
+    public void close() {
+    }
 
-    public JsonObjectBuilder<T> add(String name, BigInteger value);
+    private void test() {
+        JsonReader jsonReader = new JsonReader(new StringReader("[]"));
+        JsonValue value = jsonReader.readObject();
+        jsonReader.close();
+    }
 
-    public JsonObjectBuilder<T> add(String name, BigDecimal value);
-
-    public JsonObjectBuilder<T> add(String name, int value);
-
-    public JsonObjectBuilder<T> add(String name, long value);
-
-    public JsonObjectBuilder<T> add(String name, double value);
-
-    public JsonObjectBuilder<T> add(String name, boolean value);
-
-    public JsonObjectBuilder<T> addArray(String name, Iterable<JsonValue> values);
-
-    public JsonObjectBuilder<T> addNull(String name);
-
-    public JsonObjectBuilder<JsonObjectBuilder<T>> beginObject(String name);
-
-    public JsonArrayBuilder<JsonObjectBuilder<T>> beginArray(String name);
+    private void test1() {
+        JsonReader jsonReader = new JsonReader(new StringReader("{}"));
+        JsonValue value = jsonReader.readObject();
+        jsonReader.close();
+    }
 
 }

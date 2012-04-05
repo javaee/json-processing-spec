@@ -38,10 +38,8 @@
  * holder.
  */
 
-package javax.json.tree;
+package javax.json;
 
-import javax.json.JsonArrayVisitor;
-import javax.json.spi.JsonProvider;
 import java.io.Reader;
 import java.util.Iterator;
 import java.util.List;
@@ -50,78 +48,84 @@ import java.util.List;
  * {@code JsonArray} class represents an immutable JSON array value.
  *
  * <p>A full JsonArray instance can be created from a character stream using
- * {@link #create(Reader)}. It can also be built from scratch by calling the
- * visitor methods since the class implements {@link JsonArrayVisitor}.
- * For example, an instance can be built as follows:
+ * {@link JsonReader#readObject()}. For example:
  *
+ * <code>
  * <pre>
- * JsonObject homePhone = ...
- * JsonObject faxPhone = ...
- *
- * JsonArray phoneArray = JsonArray.create();
- * phoneArray.visitObject(homePhone);
- * phoneArray.visitObject(faxPhone);
+ * JsonReader jsonReader = new JsonReader(...));
+ * JsonArray array = (JsonArray)jsonReader.readObject();
+ * jsonReader.close();
  * </pre>
+ * </code>
  *
- * Convienently, method chaining can be used while building a {@code JsonArray}
- * instance. For example, an instance can be built as follows:
+ * It can also be built from scratch using {@link JsonBuilder#beginArray()}.
+ * <p>
+ * For example 1:
+ * <code>
  * <pre>
- * JsonArray phoneArray = JsonArray.create()
- *      .addObject(homePhone)
- *      .addObject(faxPhone);
+ * An empty JSON array can be built as follows:
+ *
+ * JsonArray array = new JsonBuilder()
+ *     .beginArray()
+ *     .endArray()
+ * .build();
  * </pre>
+ * </code>
+ *
+ * <p>
+ * For example 2:
+ * <code>
+ * <pre>
+ * The following JSON array
+ *
+ * [
+ *     { "type": "home", "number": "212 555-1234" },
+ *     { "type": "fax", "number": "646 555-4567" }
+ * ]
+ *
+ * can be built using :
+ *
+ * JsonArray array = new JsonBuilder()
+ *     .beginArray()
+ *         .beginObject()
+ *             .add("type", "home")
+ *             .add("number", "212 555-1234")
+ *         .endObject()
+ *         .beginObject()
+ *             .add("type", "home")
+ *             .add("number", "646 555-4567")
+ *         .endObject()
+ *     .endArray()
+ * .build();
+ * </pre>
+ * </code>
  *
  * {@code JsonArray} can be written to JSON text as follows:
  * <pre>
- * JsonWriter writer = ...
  * JsonArray arr = ...;
- * arr.accept(writer.visitArray());
- * </pre>
- *
- * Since {@code JsonObject} implements {@link JsonArrayVisitor}, copying
- * an array can be done as follows:
- * <pre>
- * JsonArray newArray = new JsonArray();
- * origArray.accept(newArray);
+ * JsonWriter writer = new JsonWriter(...)
+ * writer.writeObject(arr);
+ * writer.close();
  * </pre>
  *
  * @author Jitendra Kotamraju
  */
-// TODO Should we extend with List<JsonValue>. That means tying with a contract
-// TODO and need to implement some not needed methods
-public abstract class JsonArray implements JsonValue, Iterable<JsonValue> {
-
-
-    /**
-     * Creates a JSON array value from a character stream
-     *
-     * @param reader a reader from which JSON is to be read
-     * @return a JSON array
-     */
-    public static JsonArray create(Reader reader) {
-        return JsonProvider.provider().createArray(reader);
-    }
+// TODO Should we extend with List<JsonValue> ??
+public interface JsonArray extends JsonValue, Iterable<JsonValue> {
 
     /**
      * Makes the specified {@code JsonArrayVisitor} visit this JSON array
      *
      * @param visitor a JSON array value visitor
      */
-    public abstract void accept(JsonArrayVisitor visitor);
-
-    /**
-     * Returns an iterator to this JSON array values
-     *
-     * @return an iterator to array values
-     */
-    public abstract Iterator<JsonValue> getValues();
+    public void accept(JsonArrayVisitor visitor);
 
     /**
      * Returns an unmodifiable list of this JSON array values
      *
      * @return a list of array values
      */
-    public abstract List<JsonValue> getValueList();
+    public List<JsonValue> getValues();
 
     /**
      * Returns the value at the specified position in this JSON array values.
@@ -130,7 +134,7 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue> {
      * @return the value at the specified position in this array values
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public abstract JsonValue getValue(int index);
+    public JsonValue getValue(int index);
 
     /**
      * Returns the value at the specified position in this JSON array values.
@@ -140,9 +144,6 @@ public abstract class JsonArray implements JsonValue, Iterable<JsonValue> {
      * @return the value at the specified position in this array values
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    @SuppressWarnings("unchecked")
-    public <T extends JsonValue> T getValue(int index, Class<T> clazz) {
-        return (T)getValue(index);
-    }
+    public <T extends JsonValue> T getValue(int index, Class<T> clazz);
 
 }

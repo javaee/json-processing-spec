@@ -40,18 +40,21 @@
 
 package javax.json.stream;
 
-import javax.json.spi.JsonProvider;
-import javax.json.tree.JsonArray;
-import javax.json.tree.JsonNumber;
-import javax.json.tree.JsonObject;
+import javax.json.JsonArray;
+import javax.json.JsonBuilder;
+import javax.json.JsonNumber;
+import javax.json.JsonObject;
 import java.io.Closeable;
 import java.io.Reader;
+import java.io.StringReader;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Iterator;
 
 /**
  * A JSON pull parser. This is designed to be the most efficient way to
- * read JSON data. A pull parser can be created from many input sources using
- * {@link #create(Reader)}, {@link #create(JsonArray)}, {@link #create(JsonObject)}
- * methods.
+ * read JSON data. A pull parser can be created from many input sources
+ * like {@link Reader}, {@link JsonArray}, {@link JsonObject}
  * 
  * <p>
  * A JsonPullParser is used to parse JSON in a pull manner by calling
@@ -111,7 +114,8 @@ import java.io.Reader;
  *
  * <p> TODO Create event objects - Improves type safety, but what about performance ?
  */
-public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, JsonNumber, /*Auto*/Closeable {
+public class JsonPullParser implements Iterable<JsonPullParser.Event>, JsonNumber, /*Auto*/Closeable {
+
     /**
      * Event for parser state while parsing the JSON
      */
@@ -139,7 +143,7 @@ public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, 
         /**
          * Event for a number value. This event indicates a number value in
          * an array or object is parsed. The number value itself can be
-         * accessed using {@link JsonNumber} methods
+         * accessed using {@link javax.json.JsonNumber} methods
          */
         VALUE_NUMBER,
         /**
@@ -168,6 +172,33 @@ public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, 
     }
 
     /**
+     * Creates a JSON pull parser from a character stream
+     *
+     * @param reader a reader from which JSON is to be read
+     * @return a JSON pull reader
+     */
+    public JsonPullParser(Reader reader) {
+    }
+
+    /**
+     * Creates a JSON pull parser from a JSON array
+     *
+     * @param array a JSON array
+     * @return a JSON pull parser
+     */
+    public JsonPullParser(JsonArray array) {
+    }
+
+    /**
+     * Creates a JSON pull parser from a JSON object
+     *
+     * @param object a JSON object
+     * @return a JSON pull parser
+     */
+    public JsonPullParser(JsonObject object) {
+    }
+
+    /**
      * Returns name when the state is {@link Event#KEY_NAME} or returns string
      * value when the state is {@link Event#VALUE_STRING}
      * 
@@ -175,43 +206,98 @@ public abstract class JsonPullParser implements Iterable<JsonPullParser.Event>, 
      * @throws IllegalStateException when the event state is not in
      *      KEY_NAME or VALUE_STRING
      */
-    public abstract String getString();
+    public String getString() {
+        return null;
+    }
 
+    @Override
+    public Iterator<Event> iterator() {
+        return null;
+    }
+
+    @Override
+    public JsonNumberType getNumberType() {
+        return null;
+    }
+
+    @Override
+    public int getIntValue() {
+        return 0;
+    }
+
+    @Override
+    public int getIntValueExact() {
+        return 0;
+    }
+
+    @Override
+    public long getLongValue() {
+        return 0;
+    }
+
+    @Override
+    public long getLongValueExact() {
+        return 0;
+    }
+
+    @Override
+    public BigInteger bigIntegerValue() {
+        return null;
+    }
+
+    @Override
+    public BigInteger bigIntegerValueExact() {
+        return null;
+    }
+
+    @Override
+    public double doubleValue() {
+        return 0;
+    }
+
+    @Override
+    public BigDecimal bigDecimalValue() {
+        return null;
+    }
+
+    @Override
+    public JsonValueType getValueType() {
+        return null;
+    }
 
     /**
-     * Closes this reader and frees any resources associated with the
-     * reader. This doesn't close the underlying input source.
+     * Closes this parser and frees any resources associated with the
+     * parser. This doesn't close the underlying input source.
      */
     @Override
-    public abstract void close();
-
-    /**
-     * Creates a JSON pull reader from a character stream
-     *
-     * @param reader a reader from which JSON is to be read
-     * @return a JSON pull reader
-     */
-    public static JsonPullParser create(Reader reader) {
-        return JsonProvider.provider().createJsonPullParser(reader);
+    public void close() {
     }
 
-    /**
-     * Creates a JSON pull reader from a JSON array
-     *
-     * @param array a JSON array
-     * @return a JSON pull reader
-     */
-    public static JsonPullParser create(JsonArray array) {
-        return JsonProvider.provider().createJsonPullParser(array);
+    private void test() throws Exception {
+        Reader reader = new StringReader("{}");
+        JsonPullParser parser = new JsonPullParser(reader);
+        for(Event event : parser) {
+        }
+        parser.close();
+        reader.close();
     }
 
-    /**
-     * Creates a JSON pull reader from a JSON object
-     *
-     * @param object a JSON object
-     * @return a JSON pull reader
-     */
-    public static JsonPullParser create(JsonObject object) {
-        return JsonProvider.provider().createJsonPullParser(object);
+    private void test1() throws Exception {
+        JsonObject object = new JsonBuilder().beginObject().endObject().build();
+        JsonPullParser parser = new JsonPullParser(object);
+        Iterator<Event> it = parser.iterator();
+        Event event = it.next(); // START_OBJECT
+        event = it.next();       // END_OBJECT
+        parser.close();
     }
+
+    private void test2() throws Exception {
+        JsonArray array = new JsonBuilder().beginArray().endArray().build();
+        JsonPullParser parser = new JsonPullParser(array);
+        Iterator<Event> it = parser.iterator();
+        Event event = it.next(); // START_ARRAY
+        event = it.next();       // END_ARRAY
+        parser.close();
+    }
+
 }

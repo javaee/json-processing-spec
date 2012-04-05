@@ -38,7 +38,7 @@
  * holder.
  */
 
-package javax.json.tree;
+package javax.json;
 
 /**
  * Builds a JSON object or a JSON array
@@ -74,6 +74,11 @@ package javax.json.tree;
  * @author Jitendra Kotamraju
  */
 public class JsonBuilder {
+
+    public static interface JsonBuilderBase<T> {
+        public T build();
+    }
+
     /**
      * Start building of a JSON object
      *
@@ -119,4 +124,5 @@ public class JsonBuilder {
             .endArray()
         .build();
     }
+
 }

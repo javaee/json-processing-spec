@@ -38,10 +38,8 @@
  * holder.
  */
 
-package javax.json.tree;
+package javax.json;
 
-import javax.json.JsonObjectVisitor;
-import javax.json.spi.JsonProvider;
 import java.io.Reader;
 import java.util.*;
 
@@ -50,44 +48,78 @@ import java.util.*;
  *
  * <p>
  * A full JsonObject instance can be created from a character stream using
- * {@link #create(Reader)}. It can also be built from scratch by calling the
- * visitor methods since the class implements {@link JsonObjectVisitor}.
- * For example, an instance can be built as follows:
+ * {@link JsonReader#readObject()}. For example:
  *
+ * <code>
  * <pre>
- * JsonObject addressObj = ...
- * JsonArray phoneArray = ...
- * 
- * JsonObject personObj = JsonObject.create();
- * personObj.visitString("firstName", "John");
- * personObj.visitString("lastName", "Smith");
- * personObj.visitNumber("age", 25);
- * personObj.visitObject("address", addressObj);
- * personObj.visitArray("phoneNumber", phoneArray);
+ * JsonReader jsonReader = new JsonReader(...));
+ * JsonObject object = (JsonObject)jsonReader.readObject();
+ * jsonReader.close();
  * </pre>
+ * </code>
  *
- * Convienently, method chaining can also be used while building a
- * {@code JsonObject} instance. For example, an instance can be built as follows:
+ * It can also be built from scratch using {@link JsonBuilder#beginObject()}.
+ *
+ * <p>
+ * For example 1:
+ * <code>
  * <pre>
- * JsonObject personObj = JsonObject.create().addString("firstName", "John")
- *         .putString("lastName", "Smith")
- *         .putNumber("age", 25)
- *         .putObject("address", addressObj)
- *         .putArray("phoneNumber", phoneArray);
+ * An empty JSON object can be built as follows:
+ *
+ * JsonArray array = new JsonBuilder()
+ *     .beginObject()
+ *     .endObject()
+ * .build();
  * </pre>
+ * </code>
+ *
+ * <p>
+ * For example 2:
+ * <code>
+ * <pre>
+ * The following JSON object
+ *
+ * {
+ *     "firstName": "John", "lastName": "Smith", "age": 25,
+ *     "phoneNumber": [
+ *         {"type": "home", "number": "212 555-1234"},
+ *         {"type": "fax", "number": "646 555-4567"}
+ *      ]
+ * }
+ *
+ * can be built using :
+ *
+ * JsonObject object = new JsonBuilder()
+ *     .beginObject()
+ *         .add("firstName", "John")
+ *         .add("lastName", "Smith")
+ *         .add("age", 25)
+ *         .beginObject("address")
+ *             .add("streetAddress", "21 2nd Street")
+ *             .add("city", "New York")
+ *             .add("state", "NY")
+ *             .add("postalCode", "10021")
+ *         .endObject()
+ *         .beginArray("phoneNumber")
+ *             .beginObject()
+ *                 .add("type", "home")
+ *                 .add("number", "212 555-1234")
+ *             .endObject()
+ *             .beginObject()
+ *                 .add("type", "home")
+ *                 .add("number", "646 555-4567")
+ *             .endObject()
+ *         .endArray()
+ *     .endObject()
+ * .build();
+ * </pre>
+ * </code>
  *
  * {@code JsonObject} can be written to JSON text as follows:
  * <pre>
  * JsonWriter writer = ...
  * JsonObject obj = ...;
- * obj.accept(writer.visitObject());
- * </pre>
- *
- * Since {@code JsonObject} implements {@link JsonObjectVisitor}, copying
- * an object can be done as follows:
- * <pre>
- * JsonObject newObject = new JsonObject();
- * origObject.accept(newObject);
+ * writer.writeobject(obj);
  * </pre>
  *
  * <p>
@@ -113,24 +145,14 @@ import java.util.*;
  *
  * @author Jitendra Kotamraju
  */
-public abstract class JsonObject implements JsonValue {
-
-    /**
-     * Creates a JSON object from a character stream
-     *
-     * @param reader a reader from which JSON is to be read     *
-     * @return a JSON object
-     */
-    public static JsonObject create(Reader reader) {
-        return JsonProvider.provider().createObject(reader);
-    }
+public interface JsonObject extends JsonValue {
 
     /**
      * Makes the specified {@link JsonObjectVisitor} visit this JSON object
      *
      * @param visitor a JSON object value visitor
      */
-    public abstract void accept(JsonObjectVisitor visitor);
+    public void accept(JsonObjectVisitor visitor);
 
     /**
      * Returns the value to which the specified name/key is mapped,
@@ -140,7 +162,7 @@ public abstract class JsonObject implements JsonValue {
      * @return the value to which the specified name is mapped, or
      *         {@code null} if this object contains no mapping for the name/key
      */
-    public abstract JsonValue getValue(String name);
+    public JsonValue getValue(String name);
 
     /**
      * Returns the value to which the specified name/key is mapped,
@@ -151,25 +173,22 @@ public abstract class JsonObject implements JsonValue {
      * @return the value to which the specified name is mapped, or
      *         {@code null} if this object contains no mapping for the name/key
      */
-    @SuppressWarnings("unchecked")
-    public <T extends JsonValue> T getValue(String name, Class<T> clazz) {
-        return (T)getValue(name);
-    }
+    public <T extends JsonValue> T getValue(String name, Class<T> clazz);
 
     /**
-     * Returns a {@link Set} of the name/keys contained in this JSON object.
-     * Any changes to the set do not affect this JSON object.
+     * Returns an unmodifiable {@link Set} of the name/keys contained in this
+     * JSON object.
      *
      * @return a set of the name/keys contained in this JSON object
      */
-    public abstract Set<String> getNames();
+    public Set<String> getNames();
 
     /**
-     * Returns a {@link Map} of the name(key)/value pairs contained in
-     * this JSON object. Any changes to the map do not affect this JSON object.
+     * Returns an unmodifiable {@link Map} of the name(key)/value pairs contained in
+     * this JSON object.
      *
      * @return a set of the name/keys contained in this JSON object
      */
-    public abstract Map<String, JsonValue> getNameValueMap();
+    public Map<String, JsonValue> getValues();
 
 }

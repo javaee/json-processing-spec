@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2012 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2011 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -38,11 +38,40 @@
  * holder.
  */
 
-package javax.json.tree;
+package javax.json;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * @author Jitendra Kotamraju
+ * @see JsonBuilder
  */
-public enum JsonNumberType {
-    INT, LONG, BIG_INTEGER, DOUBLE, BIG_DECIMAL
+public interface JsonArrayBuilder<T> {
+    public T endArray();
+
+    public JsonArrayBuilder<T> add(JsonValue value);
+
+    public JsonArrayBuilder<T> add(String value);
+
+    public JsonArrayBuilder<T> add(BigDecimal value);
+
+    public JsonArrayBuilder<T> add(BigInteger value);
+
+    public JsonArrayBuilder<T> add(int value);
+
+    public JsonArrayBuilder<T> add(long value);
+
+    public JsonArrayBuilder<T> add(double value);
+
+    public JsonArrayBuilder<T> add(boolean value);
+
+    public JsonArrayBuilder<T> addNull();
+
+    public JsonArrayBuilder<T> addArray(Iterable<JsonValue> values);
+
+    public JsonObjectBuilder<JsonArrayBuilder<T>> beginObject();
+
+    public JsonArrayBuilder<JsonArrayBuilder<T>> beginArray();
+
 }

@@ -43,9 +43,9 @@ package javax.json.stream;
 import javax.json.JsonArrayVisitor;
 import javax.json.JsonObjectVisitor;
 import javax.json.JsonVisitor;
-import javax.json.spi.JsonProvider;
 import java.io.Closeable;
 import java.io.Reader;
+import java.io.StringReader;
 
 /**
  * A JSON push parser.
@@ -58,9 +58,9 @@ import java.io.Reader;
  * <code>
  * <pre>
  * JsonVisitor visitor = ...;
- * JsonPushReader reader = JsonPushReader.create(...);
- * reader.accept(visitor);
- * reader.close();
+ * JsonPushParser parser = new JsonPushParser(...);
+ * parser.accept(visitor);
+ * parser.close();
  * </pre>
  * </code>
  *
@@ -70,7 +70,7 @@ import java.io.Reader;
  *
  * @author Jitendra Kotamraju
  */
-public abstract class JsonPushParser implements /*Auto*/Closeable {
+public class JsonPushParser implements /*Auto*/Closeable {
 
     /**
      * Creates a JSON reader which can be used to parse JSON.
@@ -78,8 +78,7 @@ public abstract class JsonPushParser implements /*Auto*/Closeable {
      * @param reader from which JSON is read
      * @return a JSON reader
      */
-    public static JsonPushParser create(Reader reader) {
-        return JsonProvider.provider().createJsonPushParser(reader);
+    public JsonPushParser(Reader reader) {
     }
 
     /**
@@ -88,7 +87,8 @@ public abstract class JsonPushParser implements /*Auto*/Closeable {
      * @param visitor a JSON visitor
      * @throws IllegalStateException if called more than once
      */
-    public abstract void accept(JsonVisitor visitor);
+    public void accept(JsonVisitor visitor) {
+    }
 
     /**
      * Calls the appropriate visit methods of a specified JSON array visitor.
@@ -97,8 +97,8 @@ public abstract class JsonPushParser implements /*Auto*/Closeable {
      *
      * @param visitor a JSON array visitor
      */
-    public abstract void acceptArray(JsonArrayVisitor visitor);
-
+    public void acceptArray(JsonArrayVisitor visitor) {
+    }
 
     /**
      * Calls the appropriate visit methods of a specified JSON object visitor.
@@ -107,14 +107,31 @@ public abstract class JsonPushParser implements /*Auto*/Closeable {
      *
      * @param visitor a JSON object visitor
      */
-    public abstract void acceptObject(JsonObjectVisitor visitor);
-
+    public void acceptObject(JsonObjectVisitor visitor) {
+    }
 
     /**
-     * Closes this reader and frees any resources associated with the
-     * reader. This doesn't close the underlying input source.
+     * Closes this parser and frees any resources associated with the
+     * parser. This doesn't close the underlying input source.
      */
     @Override
-    public abstract void close();
+    public void close() {
+    }
+    
+    private void test() {
+        JsonPushParser parser = new JsonPushParser(new StringReader("[]"));
+        parser.accept(new JsonVisitor(){
+            @Override
+            public JsonArrayVisitor visitArray() {
+                return null;
+            }
+
+            @Override
+            public JsonObjectVisitor visitObject() {
+                return null;
+            }
+        });
+        parser.close();
+    }
 
 }

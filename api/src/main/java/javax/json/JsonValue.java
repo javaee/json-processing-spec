@@ -38,17 +38,40 @@
  * holder.
  */
 
+package javax.json;
+
 /**
- * API to build an object model or a tree representation of a JSON text.
- *
- * <p>
- * The API can be compared to Document Object Model (DOM) APIs
- * for XML documents. It provides {@link javax.json.tree.JsonObject},
- * a {@link javax.json.JsonObjectVisitor}, that builds an object
- * model of a JSON object. Similarly, it also provides
- * {@link javax.json.tree.JsonArray}, a {@link javax.json.JsonArrayVisitor},
- * that builds an object model of a JSON array.
+ * <code>JsonValue</code> represents a JSON value
  *
  * @author Jitendra Kotamraju
  */
-package javax.json.tree;
+public interface JsonValue {
+
+    public enum JsonValueType {
+        ARRAY, OBJECT, STRING, NUMBER, TRUE, FALSE, NULL
+    }
+
+    public static final JsonValue NULL = new JsonValue() {
+        @Override
+        public JsonValueType getValueType() {
+            return JsonValueType.NULL;
+        }
+    };
+
+    public static final JsonValue TRUE = new JsonValue() {
+        @Override
+        public JsonValueType getValueType() {
+            return JsonValueType.TRUE;
+        }
+    };
+
+    public static final JsonValue FALSE = new JsonValue() {
+        @Override
+        public JsonValueType getValueType() {
+            return JsonValueType.FALSE;
+        }
+    };
+
+    public JsonValueType getValueType();
+
+}

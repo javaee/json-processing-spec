@@ -38,7 +38,7 @@
  * holder.
  */
 
-package javax.json.tree;
+package javax.json;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -49,6 +49,10 @@ import java.math.BigInteger;
  * @author Jitendra Kotamraju
  */
 public interface JsonNumber extends JsonValue {
+
+    public enum JsonNumberType {
+        INT, LONG, BIG_INTEGER, DOUBLE, BIG_DECIMAL
+    }
 
     /**
      * Returns a JSON number type
@@ -124,5 +128,6 @@ public interface JsonNumber extends JsonValue {
      * @return a BigDecimal for JSON number
      */
     public BigDecimal bigDecimalValue();
+
 
 }
