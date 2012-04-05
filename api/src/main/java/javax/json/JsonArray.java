@@ -114,13 +114,6 @@ import java.util.List;
 public interface JsonArray extends JsonValue, Iterable<JsonValue> {
 
     /**
-     * Makes the specified {@code JsonArrayVisitor} visit this JSON array
-     *
-     * @param visitor a JSON array value visitor
-     */
-    public void accept(JsonArrayVisitor visitor);
-
-    /**
      * Returns an unmodifiable list of this JSON array values
      *
      * @return a list of array values

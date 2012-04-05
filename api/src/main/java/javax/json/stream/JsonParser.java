@@ -53,12 +53,12 @@ import java.util.Iterator;
 
 /**
  * A JSON pull parser. This is designed to be the most efficient way to
- * read JSON data. A pull parser can be created from many input sources
- * like {@link Reader}, {@link JsonArray}, {@link JsonObject}
+ * read JSON data. The parser can be created from many input sources
+ * like {@link Reader}, {@link JsonArray}, and {@link JsonObject}
  * 
  * <p>
- * A JsonPullParser is used to parse JSON in a pull manner by calling
- * its iterator methods. The iterator's {@code next()} method causes the reader
+ * JsonParser is used to parse JSON in a pull manner by calling
+ * its iterator methods. The iterator's {@code next()} method causes the parser
  * to read the next parse event.
  * <p>
  * For example 1:
@@ -114,7 +114,7 @@ import java.util.Iterator;
  *
  * <p> TODO Create event objects - Improves type safety, but what about performance ?
  */
-public class JsonPullParser implements Iterable<JsonPullParser.Event>, JsonNumber, /*Auto*/Closeable {
+public class JsonParser implements Iterable<JsonParser.Event>, /*Auto*/Closeable {
 
     /**
      * Event for parser state while parsing the JSON
@@ -172,96 +172,69 @@ public class JsonPullParser implements Iterable<JsonPullParser.Event>, JsonNumbe
     }
 
     /**
-     * Creates a JSON pull parser from a character stream
+     * Creates a JSON parser from a character stream
      *
      * @param reader a reader from which JSON is to be read
-     * @return a JSON pull reader
      */
-    public JsonPullParser(Reader reader) {
+    public JsonParser(Reader reader) {
     }
 
     /**
-     * Creates a JSON pull parser from a JSON array
+     * Creates a JSON parser from a JSON array
      *
      * @param array a JSON array
-     * @return a JSON pull parser
+     * @return a JSON parser
      */
-    public JsonPullParser(JsonArray array) {
+    public JsonParser(JsonArray array) {
     }
 
     /**
-     * Creates a JSON pull parser from a JSON object
+     * Creates a JSON parser from a JSON object
      *
      * @param object a JSON object
-     * @return a JSON pull parser
+     * @return a JSON parser
      */
-    public JsonPullParser(JsonObject object) {
+    public JsonParser(JsonObject object) {
     }
 
     /**
-     * Returns name when the state is {@link Event#KEY_NAME} or returns string
-     * value when the state is {@link Event#VALUE_STRING}
+     * Returns name when the parser state is {@link Event#KEY_NAME} or
+     * returns string value when the parser state is {@link Event#VALUE_STRING}
      * 
      * @return a string
-     * @throws IllegalStateException when the event state is not in
+     * @throws IllegalStateException when the parser state is not
      *      KEY_NAME or VALUE_STRING
      */
     public String getString() {
         return null;
     }
 
+    /**
+     * Returns number type and this method can only be called when the parser
+     * state is {@link Event#VALUE_NUMBER}
+     *
+     * @return a number type
+     * @throws IllegalStateException when the parser state is not
+     *      VALUE_NUMBER
+     */
+    public JsonNumber.JsonNumberType getNumberType() {
+        return null;
+    }
+
+    /**
+     * Returns a number and this method can only be called when the parser
+     * state is {@link Event#VALUE_NUMBER}
+     *
+     * @return a number
+     * @throws IllegalStateException when the parser state is not
+     *      VALUE_NUMBER
+     */
+    public JsonNumber getNumber() {
+        return null;
+    }
+
     @Override
     public Iterator<Event> iterator() {
-        return null;
-    }
-
-    @Override
-    public JsonNumberType getNumberType() {
-        return null;
-    }
-
-    @Override
-    public int getIntValue() {
-        return 0;
-    }
-
-    @Override
-    public int getIntValueExact() {
-        return 0;
-    }
-
-    @Override
-    public long getLongValue() {
-        return 0;
-    }
-
-    @Override
-    public long getLongValueExact() {
-        return 0;
-    }
-
-    @Override
-    public BigInteger bigIntegerValue() {
-        return null;
-    }
-
-    @Override
-    public BigInteger bigIntegerValueExact() {
-        return null;
-    }
-
-    @Override
-    public double doubleValue() {
-        return 0;
-    }
-
-    @Override
-    public BigDecimal bigDecimalValue() {
-        return null;
-    }
-
-    @Override
-    public JsonValueType getValueType() {
         return null;
     }
 
@@ -275,7 +248,7 @@ public class JsonPullParser implements Iterable<JsonPullParser.Event>, JsonNumbe
 
     private void test() throws Exception {
         Reader reader = new StringReader("{}");
-        JsonPullParser parser = new JsonPullParser(reader);
+        JsonParser parser = new JsonParser(reader);
         for(Event event : parser) {
         }
         parser.close();
@@ -284,7 +257,7 @@ public class JsonPullParser implements Iterable<JsonPullParser.Event>, JsonNumbe
 
     private void test1() throws Exception {
         JsonObject object = new JsonBuilder().beginObject().endObject().build();
-        JsonPullParser parser = new JsonPullParser(object);
+        JsonParser parser = new JsonParser(object);
         Iterator<Event> it = parser.iterator();
         Event event = it.next(); // START_OBJECT
         event = it.next();       // END_OBJECT
@@ -293,7 +266,7 @@ public class JsonPullParser implements Iterable<JsonPullParser.Event>, JsonNumbe
 
     private void test2() throws Exception {
         JsonArray array = new JsonBuilder().beginArray().endArray().build();
-        JsonPullParser parser = new JsonPullParser(array);
+        JsonParser parser = new JsonParser(array);
         Iterator<Event> it = parser.iterator();
         Event event = it.next(); // START_ARRAY
         event = it.next();       // END_ARRAY

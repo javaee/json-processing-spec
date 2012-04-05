@@ -148,13 +148,6 @@ import java.util.*;
 public interface JsonObject extends JsonValue {
 
     /**
-     * Makes the specified {@link JsonObjectVisitor} visit this JSON object
-     *
-     * @param visitor a JSON object value visitor
-     */
-    public void accept(JsonObjectVisitor visitor);
-
-    /**
      * Returns the value to which the specified name/key is mapped,
      * or {@code null} if this object contains no mapping for the name/key.
      *
