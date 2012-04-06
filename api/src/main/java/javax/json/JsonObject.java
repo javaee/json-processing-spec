@@ -40,8 +40,8 @@
 
 package javax.json;
 
-import java.io.Reader;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * {@code JsonObject} class represents an immutable JSON object value.
@@ -116,32 +116,40 @@ import java.util.*;
  * </code>
  *
  * {@code JsonObject} can be written to JSON text as follows:
+ * <code>
  * <pre>
  * JsonWriter writer = ...
  * JsonObject obj = ...;
  * writer.writeobject(obj);
  * </pre>
+ * </code>
  *
  * <p>
- * TODO 1. order of name-value pairs. RFC says "unordered collection of zero or more name/value
- * pairs". Should we preserve the order or not ?
- * <p>
- * TODO 2. Duplicate names. RFC says "The names within an object SHOULD be unique." Shall we
- * allow it or not ? json.org doesn't allow it. Need to experiment with javascript
+ * {@code JsonObject} values can be {@link JsonObject}, {@link JsonArray},
+ * {@link JsonString}, {@link JsonNumber}, {@link JsonValue#TRUE},
+ * {@link JsonValue#FALSE}, {@link JsonValue#NULL}. These values can be
+ * accessed using various accessor methods. For example:
+ *
+ * <code>
+ * <pre>
+ * In the above example 2, "John" can be got using
+ *
+ * String firstName = object.getValue("firstName", JsonString.class).getValue();
+ * </pre>
+ * </code>
  *
  * <p>
- * TODO 3. Implement {@code Map&lt;String, JsonValue>} Hard to implement lazily ??
+ * TODO 1. Implement {@code Map&lt;String, JsonValue>} Hard to implement lazily ??
  * Too many methods to implement ??
  *
  * <p>
- * TODO 4. define equals() semantics
+ * TODO 2. define equals() semantics
  *
  * <p>
- * TODO Serialization
+ * TODO 3. Serialization
  *
  * <p>
- * TODO 5. Define an iterating order to be predictable like the order in which
- * name/keys are inserted ?? Will help streaming and testing
+ * TODO 4. Define an predictable iterating order ??
  *
  * @author Jitendra Kotamraju
  */
@@ -177,8 +185,8 @@ public interface JsonObject extends JsonValue {
     public Set<String> getNames();
 
     /**
-     * Returns an unmodifiable {@link Map} of the name(key)/value pairs contained in
-     * this JSON object.
+     * Returns an unmodifiable {@link Map} of the name(key)/value pairs
+     * contained in this JSON object.
      *
      * @return a set of the name/keys contained in this JSON object
      */

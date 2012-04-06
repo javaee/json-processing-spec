@@ -40,8 +40,6 @@
 
 package javax.json;
 
-import java.io.Reader;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -107,6 +105,21 @@ import java.util.List;
  * writer.writeObject(arr);
  * writer.close();
  * </pre>
+ *
+ * <p>
+ * {@code JsonArray} values can be {@link JsonObject}, {@link JsonArray},
+ * {@link JsonString}, {@link JsonNumber}, {@link JsonValue#TRUE},
+ * {@link JsonValue#FALSE}, {@link JsonValue#NULL}. These values can be
+ * accessed using various accessor methods. For example:
+ *
+ * <code>
+ * <pre>
+ * In the above example 2, home number "212 555-1234" can be got using:
+ *
+ * JsonObject home = array.getValue(0, JsonObject.class);
+ * String number = home.getValue("number", JsonString.class).getValue();
+ * </pre>
+ * </code>
  *
  * @author Jitendra Kotamraju
  */
