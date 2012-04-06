@@ -39,31 +39,14 @@
  */
 
 /**
- * Java API for JSON Processing API provides a way to process
- * (for e.g. parse, generate, transform and query) JSON.
+ * Provides a streaming API to parse and generate JSON.
  *
- * This API can be used to:
- * <ul>
- * <li>Produce and consume JSON text in a streaming fashion(similar to StAX API for XML)</li>
- * <li>Build a Java object model for JSON text using API classes(similar to DOM API for XML)</li>
- * </ul>
+ * <p>
+ * {@code JsonParser} can be used to parse JSON in a streaming way.
+ * {@code JsonGenerator} can be used to generate JSON from scratch in a
+ * streaming way.
  *
- * {@code JsonWriter} can be used to create JSON by calling its visit
- * methods.
- *
- * {@code JsonPullReader} can be used to parse JSON text and make a
- * given visitor visit it.
- *
- * @since Java API for JSON Processing 1.0
+ * @since JSON-P 1.0
  * @author Jitendra Kotamraju
- *
- *
- * Serialization
- *
- * Thread-safety
- *
- * Async support
- *
- * Streaming - split String values into multiple parts
  */
 package javax.json.stream;

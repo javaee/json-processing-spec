@@ -48,21 +48,10 @@
  * <li>Build a Java object model for JSON text using API classes(similar to DOM API for XML)</li>
  * </ul>
  *
- * The API uses popular visitor pattern and builds around <code>JsonObjectVisitor</code>, <code>JsonArrayVisitor</code> that
- * can be used to visit the JSON objects, arrays and their members.
+ * The object model API uses builder pattern to build object models of JSON
+ * objects {@code JsonObject} and arrays {@code JsonArray} from scratch.
  *
- *  * API to build an object model or a tree representation of a JSON text.
- *
- * <p>
- * The API can be compared to Document Object Model (DOM) APIs
- * for XML documents. It provides {@link javax.json.JsonObject},
- * a {@link javax.json.JsonObjectVisitor}, that builds an object
- * model of a JSON object. Similarly, it also provides
- * {@link javax.json.JsonArray}, a {@link javax.json.JsonArrayVisitor},
- * that builds an object model of a JSON array.
- *
- *
- * @since Java API for JSON Processing 1.0
+ * @since JSON-P 1.0
  * @author Jitendra Kotamraju
  *
  *
@@ -70,9 +59,8 @@
  *
  * <p> TODO Thread-safety
  *
- * <p> Async/NIO support
- * <p> equals() for tree API
- * <p> Streaming - split String values into multiple parts
- *
+ * <p> TODO Async/NIO support
+ * <p> TODO equals() for tree API
+ * <p> TODO Streaming - split String values into multiple parts
  */
 package javax.json;
