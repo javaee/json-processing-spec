@@ -103,7 +103,7 @@ public interface JsonNumber extends JsonValue {
      *
      * @return a long for JSON number.
      */
-    public BigInteger bigIntegerValue();
+    public BigInteger getBigIntegerValue();
 
     /**
      * Converts JSON number to a {@code BigDecimal} number.
@@ -111,7 +111,7 @@ public interface JsonNumber extends JsonValue {
      * @return a BigDecimal for JSON number
      * @throws javax.json.JsonException when number will not fit in a {@code BigDecimal}.
      */
-    public BigInteger bigIntegerValueExact();
+    public BigInteger getBigIntegerValueExact();
 
     /**
      * Converts JSON number to a double number. Note that this conversion
@@ -120,14 +120,14 @@ public interface JsonNumber extends JsonValue {
      *
      * @return a long for JSON number
      */
-    public double doubleValue();
+    public double getDoubleValue();
 
     /**
      * Converts JSON number to a {@code BigDecimal}
      *
      * @return a BigDecimal for JSON number
      */
-    public BigDecimal bigDecimalValue();
+    public BigDecimal getBigDecimalValue();
 
 
 }
