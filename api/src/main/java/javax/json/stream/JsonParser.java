@@ -52,14 +52,15 @@ import java.math.BigInteger;
 import java.util.Iterator;
 
 /**
- * A JSON pull parser. This is designed to be the most efficient way to
- * read JSON data. The parser can be created from many input sources
+ * A JSON pull parser that allows forward, read-only access to JSON in a
+ * a streaming way. This is designed to be the most efficient
+ * way to read JSON data. The parser can be created from many input sources
  * like {@link Reader}, {@link JsonArray}, and {@link JsonObject}
  * 
  * <p>
- * JsonParser is used to parse JSON in a pull manner by calling
- * its iterator methods. The iterator's {@code next()} method causes the parser
- * to read the next parse event.
+ * The JsonParser is used to parse JSON in a pull manner by calling its iterator
+ * methods. The iterator's {@code next()} method causes the parser to advance
+ * to the next parse state.
  * <p>
  * For example 1:
  * <p>For empty JSON object { },
@@ -111,8 +112,6 @@ import java.util.Iterator;
  * </code>
  *
  * @author Jitendra Kotamraju
- *
- * <p> TODO Create event objects - Improves type safety, but what about performance ?
  */
 public class JsonParser implements Iterable<JsonParser.Event>, /*Auto*/Closeable {
 
@@ -174,7 +173,7 @@ public class JsonParser implements Iterable<JsonParser.Event>, /*Auto*/Closeable
     /**
      * Creates a JSON parser from a character stream
      *
-     * @param reader a reader from which JSON is to be read
+     * @param reader a i/o reader from which JSON is to be read
      */
     public JsonParser(Reader reader) {
     }
@@ -183,7 +182,6 @@ public class JsonParser implements Iterable<JsonParser.Event>, /*Auto*/Closeable
      * Creates a JSON parser from a JSON array
      *
      * @param array a JSON array
-     * @return a JSON parser
      */
     public JsonParser(JsonArray array) {
     }
@@ -192,7 +190,6 @@ public class JsonParser implements Iterable<JsonParser.Event>, /*Auto*/Closeable
      * Creates a JSON parser from a JSON object
      *
      * @param object a JSON object
-     * @return a JSON parser
      */
     public JsonParser(JsonObject object) {
     }
@@ -224,6 +221,9 @@ public class JsonParser implements Iterable<JsonParser.Event>, /*Auto*/Closeable
     /**
      * Returns a number and this method can only be called when the parser
      * state is {@link Event#VALUE_NUMBER}
+     *
+     * <p>TODO Any performance implications of creating JsonNumber,
+     * Otherwise, need to expose methods from JsonNumber
      *
      * @return a number
      * @throws IllegalStateException when the parser state is not

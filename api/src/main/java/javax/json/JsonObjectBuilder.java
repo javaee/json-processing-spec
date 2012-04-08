@@ -46,6 +46,7 @@ import java.math.BigInteger;
 /**
  * @author Jitendra Kotamraju
  * @see JsonBuilder
+ * @see javax.json.stream.JsonGenerator
  */
 public interface JsonObjectBuilder<T> {
 

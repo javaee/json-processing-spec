@@ -45,6 +45,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 /**
+ * A JSON writer.
+ *
  * <code>
  * <pre>
  * JsonWriter jsonWriter = new JsonWriter(...);
@@ -58,13 +60,31 @@ public class JsonWriter implements /*Auto*/Closeable {
 
     private final Writer writer;
 
+    /**
+     * Creates a JSON writer which can be used to write a JSON
+     * object or array to the specified i/o writer.
+     *
+     * @param writer to which JSON object or array is written
+     */
     public JsonWriter(Writer writer) {
         this.writer = writer;
     }
 
+    /**
+     * This method needs to be called only once for this instance.
+     *
+     * @throws JsonException if the specified JSON object cannot be
+     *     written due to i/o error
+     */
     public void writeArray(JsonArray value) {
     }
 
+    /**
+     * This method needs to be called only once for this instance.
+     *
+     * @throws JsonException if the specified JSON object cannot be
+     *     written due to i/o error
+     */
     public void writeObject(JsonObject value) {
     }
 

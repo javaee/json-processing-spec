@@ -45,7 +45,10 @@ import java.io.Reader;
 import java.io.StringReader;
 
 /**
- * A JSON reader
+ * A JSON reader.
+ *
+ * <p>
+ * This reader reads a JSON object or array from the stream. For example:
  *
  * <code>
  * <pre>
@@ -70,9 +73,12 @@ public class JsonReader implements /*Auto*/Closeable {
 
     /**
      * Returns a JSON array or object that is represented in
-     * the character stream
+     * the character stream. This method needs to be called
+     * only once for a reader instance.
      *
-     * @return a JSON array or object
+     * @return a {@link JsonArray} or {@code JsonObject}
+     * @throws JsonException if a JsonObject or JsonArray cannot
+     *     be created due to i/o error or incorrect representation
      */
     public JsonValue readObject() {
         return null;

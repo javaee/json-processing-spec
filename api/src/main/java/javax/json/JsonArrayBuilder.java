@@ -44,8 +44,10 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
+ *
  * @author Jitendra Kotamraju
  * @see JsonBuilder
+ * @see javax.json.stream.JsonGenerator
  */
 public interface JsonArrayBuilder<T> {
     public T endArray();

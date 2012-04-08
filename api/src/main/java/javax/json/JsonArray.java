@@ -107,7 +107,8 @@ import java.util.List;
  * </pre>
  *
  * <p>
- * {@code JsonArray} values can be {@link JsonObject}, {@link JsonArray},
+ * {@code Jso
+ * nArray} values can be {@link JsonObject}, {@link JsonArray},
  * {@link JsonString}, {@link JsonNumber}, {@link JsonValue#TRUE},
  * {@link JsonValue#FALSE}, {@link JsonValue#NULL}. These values can be
  * accessed using various accessor methods. For example:

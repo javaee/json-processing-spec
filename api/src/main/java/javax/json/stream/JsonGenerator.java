@@ -79,7 +79,7 @@ import java.io.Writer;
  *     .endObject();
  * generator.close();
  *
- * would produce a JSON equivalent to the following:
+ * would generate a JSON equivalent to the following:
  * {
  *   "firstName": "John", "lastName": "Smith", "age": 25,
  *   "phoneNumber": [
@@ -96,25 +96,27 @@ import java.io.Writer;
 public class JsonGenerator implements /*Auto*/Closeable {
 
     /**
-     * Creates a JSON writer which can be used to write JSON text to the
-     * writer.
+     * Creates a JSON generator which can be used to write JSON text to the
+     * specified i/o writer.
      *
-     * @param writer to which data is written
-     * @return a JSON writer
+     * @param writer to which JSON is written
      */
-    public JsonGenerator (Writer writer) {
+    public JsonGenerator(Writer writer) {
     }
 
     /**
      * Starts writing of a JSON object in a streaming fashion.
      */
-    public JsonObjectBuilder<Closeable> beginObject() { return null; }
+    public JsonObjectBuilder<Closeable> beginObject() {
+        return null;
+    }
 
     /**
      * Starts writing of a JSON array in a streaming fashion.
      */
-    public JsonArrayBuilder<Closeable> beginArray() { return null; }
-
+    public JsonArrayBuilder<Closeable> beginArray() {
+        return null;
+    }
 
     /**
      * Closes this generator and frees any resources associated with the
@@ -148,7 +150,20 @@ public class JsonGenerator implements /*Auto*/Closeable {
                     .endObject()
                 .endArray()
             .endObject();
+        generator.close();
 
+        generator = new JsonGenerator(new StringWriter());
+        generator
+            .beginArray()
+                .beginObject()
+                    .add("type", "home")
+                    .add("number", "212 555-1234")
+                .endObject()
+                .beginObject()
+                    .add("type", "fax")
+                    .add("number", "646 555-4567")
+                .endObject()
+            .endArray();
         generator.close();
     }
 
