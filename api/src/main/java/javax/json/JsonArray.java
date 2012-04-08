@@ -107,8 +107,7 @@ import java.util.List;
  * </pre>
  *
  * <p>
- * {@code Jso
- * nArray} values can be {@link JsonObject}, {@link JsonArray},
+ * {@code JsonArray} values can be {@link JsonObject}, {@link JsonArray},
  * {@link JsonString}, {@link JsonNumber}, {@link JsonValue#TRUE},
  * {@link JsonValue#FALSE}, {@link JsonValue#NULL}. These values can be
  * accessed using various accessor methods. For example:
@@ -152,5 +151,8 @@ public interface JsonArray extends JsonValue, Iterable<JsonValue> {
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     public <T extends JsonValue> T getValue(int index, Class<T> clazz);
+
+    // TODO String getValue(int index) ??
+    // TODO int getValue(int index) ??
 
 }

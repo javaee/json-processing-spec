@@ -54,21 +54,21 @@ public interface JsonValue {
     public static final JsonValue NULL = new JsonValue() {
         @Override
         public JsonValueType getValueType() {
-            return JsonValueType.NULL;
+        return JsonValueType.NULL;
         }
     };
 
     public static final JsonValue TRUE = new JsonValue() {
         @Override
         public JsonValueType getValueType() {
-            return JsonValueType.TRUE;
+        return JsonValueType.TRUE;
         }
     };
 
     public static final JsonValue FALSE = new JsonValue() {
         @Override
         public JsonValueType getValueType() {
-            return JsonValueType.FALSE;
+        return JsonValueType.FALSE;
         }
     };
 

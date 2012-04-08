@@ -106,6 +106,8 @@ public class JsonGenerator implements /*Auto*/Closeable {
 
     /**
      * Starts writing of a JSON object in a streaming fashion.
+     *
+     * @return an object builder
      */
     public JsonObjectBuilder<Closeable> beginObject() {
         return null;
@@ -113,6 +115,8 @@ public class JsonGenerator implements /*Auto*/Closeable {
 
     /**
      * Starts writing of a JSON array in a streaming fashion.
+     *
+     * @return an array builder
      */
     public JsonArrayBuilder<Closeable> beginArray() {
         return null;

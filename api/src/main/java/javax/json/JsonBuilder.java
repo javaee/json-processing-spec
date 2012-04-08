@@ -46,9 +46,20 @@ import java.util.Set;
 /**
  * Builds a JSON object or a JSON array
  *
- * <code>
  * <pre>
- * JsonObject value = new JsonBuilder()
+ * For the following JSON
+ *
+ * {
+ *     "firstName": "John", "lastName": "Smith", "age": 25,
+ *     "phoneNumber": [
+ *         { "type": "home", "number": "212 555-1234" },
+ *         { "type": "fax", "number": "646 555-4567" }
+ *     ]
+ * }
+ *
+ * a JsonObject instance can be built using:
+ *
+ * <code>JsonObject value = new JsonBuilder()
  *     .beginObject()
  *         .add("firstName", "John")
  *         .add("lastName", "Smith")
@@ -71,8 +82,8 @@ import java.util.Set;
  *         .endArray()
  *     .endObject()
  * .build();
- * </pre>
  * </code>
+ * </pre>
  *
  * @author Jitendra Kotamraju
  */
@@ -87,15 +98,18 @@ public class JsonBuilder {
      *
      * @return an object builder
      */
-    public JsonObjectBuilder<JsonBuilderBase<JsonObject>> beginObject() { return null; }
+    public JsonObjectBuilder<JsonBuilderBase<JsonObject>> beginObject() {
+        return null;
+    }
 
     /**
      * Start building of a JSON array
      *
      * @return an array builder
      */
-    public JsonArrayBuilder<JsonBuilderBase<JsonArray>> beginArray() { return null; }
-
+    public JsonArrayBuilder<JsonBuilderBase<JsonArray>> beginArray() {
+        return null;
+    }
 
     private void testObject() {
         JsonObject object = new JsonBuilder()

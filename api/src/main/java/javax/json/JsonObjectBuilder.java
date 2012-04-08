@@ -44,6 +44,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
+ * Helps in building a JSON object
+ *
  * @author Jitendra Kotamraju
  * @see JsonBuilder
  * @see javax.json.stream.JsonGenerator

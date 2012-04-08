@@ -47,8 +47,12 @@ import java.io.Writer;
 /**
  * A JSON writer.
  *
+ * <p>
+ * This writer writes a JSON object or array to the stream. For example:
  * <code>
  * <pre>
+ * An empty JSON object can be written as follows:
+ *
  * JsonWriter jsonWriter = new JsonWriter(...);
  * jsonWriter.writeObject(new JsonBuilder().beginObject().endObject().build());
  * jsonWriter.close();
@@ -71,7 +75,8 @@ public class JsonWriter implements /*Auto*/Closeable {
     }
 
     /**
-     * This method needs to be called only once for this instance.
+     * Writes the specified {@link JsonArray}'s representation to the character
+     * stream. This method needs to be called only once for a writer instance.
      *
      * @throws JsonException if the specified JSON object cannot be
      *     written due to i/o error
@@ -80,7 +85,8 @@ public class JsonWriter implements /*Auto*/Closeable {
     }
 
     /**
-     * This method needs to be called only once for this instance.
+     * Writes the specified {@link JsonObject}'s representation to the character
+     * stream. This method needs to be called only once for a writer instance.
      *
      * @throws JsonException if the specified JSON object cannot be
      *     written due to i/o error

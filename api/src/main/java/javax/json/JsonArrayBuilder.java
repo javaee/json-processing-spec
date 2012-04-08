@@ -44,6 +44,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
+ * Helps in building a JSON array
  *
  * @author Jitendra Kotamraju
  * @see JsonBuilder

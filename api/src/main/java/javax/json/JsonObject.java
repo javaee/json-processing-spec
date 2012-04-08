@@ -192,4 +192,7 @@ public interface JsonObject extends JsonValue {
      */
     public Map<String, JsonValue> getValues();
 
+    // TODO String getValue(String name) ??
+    // TODO int getValue(String name) ??
+
 }
