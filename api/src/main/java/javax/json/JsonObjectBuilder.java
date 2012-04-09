@@ -42,6 +42,7 @@ package javax.json;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Map;
 
 /**
  * Helps in building a JSON object
@@ -52,30 +53,187 @@ import java.math.BigInteger;
  */
 public interface JsonObjectBuilder<T> {
 
+    /**
+     * Indicates the end of the JSON object that is being built.
+     *
+     * @return
+     */
     public T endObject();
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> add(String name, JsonValue value);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> add(String name, String value);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> add(String name, BigInteger value);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> add(String name, BigDecimal value);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> add(String name, int value);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> add(String name, long value);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> add(String name, double value);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * <p>TODO not needed since add(JsonValue.TRUE|FALSE) can be used ??
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> add(String name, boolean value);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @param value value to be associated with the specified name/key
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> addArray(String name, Iterable<JsonValue> values);
 
+    /**
+     *
+     * @return this object builder
+     *
+    public JsonObjectBuilder<T> addObject(String name, Map<String, JsonValue> values);
+    */
+
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * <p>TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @return this object builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<T> addNull(String name);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @return a object member builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonObjectBuilder<JsonObjectBuilder<T>> beginObject(String name);
 
+    /**
+     * Associates the specified value with the specified name/key in the
+     * JSON object that is being built.
+     *
+     * @param name name/key with which the specified value is to be associated
+     * @return a array member builder
+     * @throws JsonException if there is a mapping for the specified name/key
+     * in the JSON object
+     * @throws IllegalStateException invoking the method after endObject()
+     * is already called
+     */
     public JsonArrayBuilder<JsonObjectBuilder<T>> beginArray(String name);
 
 }

@@ -51,30 +51,95 @@ import java.math.BigInteger;
  * @see javax.json.stream.JsonGenerator
  */
 public interface JsonArrayBuilder<T> {
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return
+     */
     public T endArray();
 
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> add(JsonValue value);
 
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> add(String value);
 
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> add(BigDecimal value);
 
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> add(BigInteger value);
 
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> add(int value);
 
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> add(long value);
 
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> add(double value);
 
+    /**
+     * TODO not needed since add(JsonValue.TRUE|FALSE) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> add(boolean value);
 
+    /**
+     * TODO not needed since add(JsonValue.NULL) can be used ??
+     *
+     * @return this array builder
+     */
     public JsonArrayBuilder<T> addNull();
 
+    /**
+     *
+     * @param values
+     * @return
+     */
     public JsonArrayBuilder<T> addArray(Iterable<JsonValue> values);
 
+    /**
+     * Returns a JSON array builder to build a new child object
+     *
+     * @return an array builder
+     */
     public JsonObjectBuilder<JsonArrayBuilder<T>> beginObject();
 
+    /**
+     * Returns a JSON array builder to build a new child array
+     *
+     * @return an array builder
+     */
     public JsonArrayBuilder<JsonArrayBuilder<T>> beginArray();
 
 }

@@ -89,7 +89,12 @@ import java.util.Set;
  */
 public class JsonBuilder {
 
-    public static interface JsonBuilderBase<T> {
+    public static interface JsonBuildable<T> {
+        /**
+         * Builds a JSON object or array
+         *
+         * @return built object
+         */
         public T build();
     }
 
@@ -98,7 +103,7 @@ public class JsonBuilder {
      *
      * @return an object builder
      */
-    public JsonObjectBuilder<JsonBuilderBase<JsonObject>> beginObject() {
+    public JsonObjectBuilder<JsonBuildable<JsonObject>> beginObject() {
         return null;
     }
 
@@ -107,7 +112,7 @@ public class JsonBuilder {
      *
      * @return an array builder
      */
-    public JsonArrayBuilder<JsonBuilderBase<JsonArray>> beginArray() {
+    public JsonArrayBuilder<JsonBuildable<JsonArray>> beginArray() {
         return null;
     }
 
