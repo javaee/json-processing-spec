@@ -52,7 +52,7 @@ import java.math.BigInteger;
 import java.util.Iterator;
 
 /**
- * A JSON pull parser that allows forward, read-only access to JSON in a
+ * A JSON parser that allows forward, read-only access to JSON in a
  * a streaming way. This is designed to be the most efficient
  * way to read JSON data. The parser can be created from many input sources
  * like {@link Reader}, {@link JsonArray}, and {@link JsonObject}

@@ -94,7 +94,7 @@ public class JsonBuilder {
     }
 
     /**
-     * Start building of a JSON object
+     * Start building a JSON object
      *
      * @return an object builder
      */
@@ -103,7 +103,7 @@ public class JsonBuilder {
     }
 
     /**
-     * Start building of a JSON array
+     * Start building a JSON array
      *
      * @return an array builder
      */

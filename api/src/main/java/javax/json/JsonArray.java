@@ -74,7 +74,7 @@ import java.util.List;
  * For example 2:
  * <code>
  * <pre>
- * The following JSON array
+ * The following JSON
  *
  * [
  *     { "type": "home", "number": "212 555-1234" },
@@ -98,7 +98,7 @@ import java.util.List;
  * </pre>
  * </code>
  *
- * {@code JsonArray} can be written to JSON text as follows:
+ * {@code JsonArray} can be written to JSON as follows:
  * <pre>
  * JsonArray arr = ...;
  * JsonWriter writer = new JsonWriter(...)

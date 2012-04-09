@@ -77,7 +77,7 @@ import java.util.Set;
  * For example 2:
  * <code>
  * <pre>
- * The following JSON object
+ * The following JSON
  *
  * {
  *     "firstName": "John", "lastName": "Smith", "age": 25,
@@ -115,7 +115,7 @@ import java.util.Set;
  * </pre>
  * </code>
  *
- * {@code JsonObject} can be written to JSON text as follows:
+ * {@code JsonObject} can be written to JSON as follows:
  * <code>
  * <pre>
  * JsonWriter writer = ...
