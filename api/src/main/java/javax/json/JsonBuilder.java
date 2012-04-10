@@ -47,10 +47,16 @@ import java.util.Set;
  * Builds a JSON object or a JSON array
  *
  * <pre>
- * For the following JSON
+ * For example: For the following JSON
  *
  * {
  *     "firstName": "John", "lastName": "Smith", "age": 25,
+ *     "address" : {
+ *         "streetAddress", "21 2nd Street",
+ *         "city", "New York",
+ *         "state", "NY",
+ *         "postalCode", "10021"
+ *     },
  *     "phoneNumber": [
  *         { "type": "home", "number": "212 555-1234" },
  *         { "type": "fax", "number": "646 555-4567" }
@@ -89,11 +95,14 @@ import java.util.Set;
  */
 public class JsonBuilder {
 
-    public static interface JsonBuildable<T> {
+    /**
+     * Build task that gives the result of the build process
+     */
+    public static interface JsonBuildable<T extends JsonValue> {
         /**
          * Builds a JSON object or array
          *
-         * @return built object
+         * @return built object or array
          */
         public T build();
     }

@@ -44,7 +44,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * Helps in building a JSON array.
+ * Helps in building a JSON array. This is an intermediary class and the
+ * actual build process is started from {@link JsonBuilder} or
+ * {@link javax.json.stream.JsonGenerator}
  *
  * @author Jitendra Kotamraju
  * @see JsonBuilder

@@ -43,6 +43,9 @@ package javax.json;
 /**
  * {@code JsonString} represents a JSON string value
  *
+ * <p>TODO Should we just use String instead of this wrapper type for
+ * performance reasons
+ *
  * @author Jitendra Kotamraju
  */
 public interface JsonString extends JsonValue {

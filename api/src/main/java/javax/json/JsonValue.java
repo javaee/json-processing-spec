@@ -51,7 +51,40 @@ public interface JsonValue {
      * JSON value type
      */
     public enum JsonValueType {
-        ARRAY, OBJECT, STRING, NUMBER, TRUE, FALSE, NULL
+        /**
+         * JSON array value type
+         */
+        ARRAY,
+
+        /**
+         * JSON object value type
+         */
+        OBJECT,
+
+        /**
+         * JSON string value type
+         */
+        STRING,
+
+        /**
+         * JSON number value type
+         */
+        NUMBER,
+
+        /**
+         * JSON true value type
+         */
+        TRUE,
+
+        /**
+         * JSON false value type
+         */
+        FALSE,
+
+        /**
+         * JSON null value type
+         */
+        NULL
     }
 
     /**

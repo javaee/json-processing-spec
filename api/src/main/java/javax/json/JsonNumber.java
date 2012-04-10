@@ -46,12 +46,41 @@ import java.math.BigInteger;
 /**
  * <code>JsonNumber</code> represents a JSON number value.
  *
+ * <p>TODO Should we just use Integer|Long|BigInteger|Double|BigDecimal
+ * instead of this wrapper type for performance reasons
+ *
  * @author Jitendra Kotamraju
  */
 public interface JsonNumber extends JsonValue {
 
+    /**
+     * JSON number type
+     */
     public enum JsonNumberType {
-        INT, LONG, BIG_INTEGER, DOUBLE, BIG_DECIMAL
+        /**
+         * int number type
+         */
+        INT,
+
+        /**
+         * long number type
+         */
+        LONG,
+
+        /**
+         * BigInteger number type
+         */
+        BIG_INTEGER,
+
+        /**
+         * double number type
+         */
+        DOUBLE,
+
+        /**
+         * BigDecimal number type
+         */
+        BIG_DECIMAL
     }
 
     /**
