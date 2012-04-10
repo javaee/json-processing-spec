@@ -47,31 +47,48 @@ package javax.json;
  */
 public interface JsonValue {
 
+    /**
+     * JSON value type
+     */
     public enum JsonValueType {
         ARRAY, OBJECT, STRING, NUMBER, TRUE, FALSE, NULL
     }
 
+    /**
+     * JSON null value
+     */
     public static final JsonValue NULL = new JsonValue() {
         @Override
         public JsonValueType getValueType() {
-        return JsonValueType.NULL;
+            return JsonValueType.NULL;
         }
     };
 
+    /**
+     * JSON true value
+     */
     public static final JsonValue TRUE = new JsonValue() {
         @Override
         public JsonValueType getValueType() {
-        return JsonValueType.TRUE;
+            return JsonValueType.TRUE;
         }
     };
 
+    /**
+     * JSON false value
+     */
     public static final JsonValue FALSE = new JsonValue() {
         @Override
         public JsonValueType getValueType() {
-        return JsonValueType.FALSE;
+            return JsonValueType.FALSE;
         }
     };
 
+    /**
+     * Returns the value type of this JSON value
+     *
+     * @return JSON value type
+     */
     public JsonValueType getValueType();
 
 }

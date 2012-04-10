@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2012 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -44,101 +44,146 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * Helps in building a JSON array
+ * Helps in building a JSON array.
  *
  * @author Jitendra Kotamraju
  * @see JsonBuilder
  * @see javax.json.stream.JsonGenerator
  */
 public interface JsonArrayBuilder<T> {
+
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Indicates the end of the JSON array that is being built.
      *
-     * @return
+     * @return the enclosing object of type T
      */
     public T endArray();
 
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Adds the specified value to the array that is being built.
      *
+     * @param value
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> add(JsonValue value);
 
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Adds the specified value as a JSON string value to the array
+     * that is being built.
      *
+     * @param value string
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> add(String value);
 
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Adds the specified value as a JSON number value to the array
+     * that is being built.
      *
+     * @param value a number
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> add(BigDecimal value);
 
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Adds the specified value as a JSON number value to the array
+     * that is being built.
      *
+     * @param value a number
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> add(BigInteger value);
 
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Adds the specified value as a JSON number value to the array
+     * that is being built.
      *
+     * @param value a number
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> add(int value);
 
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Adds the specified value as a JSON number value to the array
+     * that is being built.
      *
+     * @param value a number
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> add(long value);
 
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Adds the specified value as a JSON number value to the array
+     * that is being built.
      *
+     * @param value a number
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> add(double value);
 
     /**
-     * TODO not needed since add(JsonValue.TRUE|FALSE) can be used ??
+     * Adds a JSON true or false value to the array that is being built.
      *
+     * <p>TODO not needed since add(JsonValue.TRUE|FALSE) can be used ??
+     *
+     * @param value a boolean
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> add(boolean value);
 
     /**
-     * TODO not needed since add(JsonValue.NULL) can be used ??
+     * Adds the JSON null value to the array that is being built.
+     *
+     * <p>TODO not needed since add(JsonValue.NULL) can be used ??
      *
      * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> addNull();
 
     /**
+     * Adds the specified values as a JSON array to the array
+     * that is being built.
      *
-     * @param values
-     * @return
+     * @param values JSON array values
+     * @return this array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<T> addArray(Iterable<JsonValue> values);
 
     /**
-     * Returns a JSON array builder to build a new child object
+     * Returns a JSON array builder to build a new object value
      *
      * @return an array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonObjectBuilder<JsonArrayBuilder<T>> beginObject();
 
     /**
-     * Returns a JSON array builder to build a new child array
+     * Returns a JSON array builder to build a new array value
      *
      * @return an array builder
+     * @throws IllegalStateException when invoked after endArray method is
+     * called.
      */
     public JsonArrayBuilder<JsonArrayBuilder<T>> beginArray();
 
