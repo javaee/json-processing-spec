@@ -80,6 +80,8 @@ public class JsonWriter implements /*Auto*/Closeable {
      *
      * @throws JsonException if the specified JSON object cannot be
      *     written due to i/o error
+     * @throws IllegalStateException if this method, or writeObject or close
+     *     method is already called
      */
     public void writeArray(JsonArray value) {
     }
@@ -90,6 +92,8 @@ public class JsonWriter implements /*Auto*/Closeable {
      *
      * @throws JsonException if the specified JSON object cannot be
      *     written due to i/o error
+     * @throws IllegalStateException if this method, or writeArray or close
+     *     method is already called
      */
     public void writeObject(JsonObject value) {
     }

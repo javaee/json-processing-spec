@@ -81,6 +81,8 @@ public class JsonReader implements /*Auto*/Closeable {
      * @return a {@link JsonArray} or {@code JsonObject}
      * @throws JsonException if a JsonObject or JsonArray cannot
      *     be created due to i/o error or incorrect representation
+     * @throws IllegalStateException if this method or close method is
+     *     already called
      */
     public JsonValue readObject() {
         return null;
