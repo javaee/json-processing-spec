@@ -134,6 +134,7 @@ public interface JsonArrayBuilder<T> {
      * @return this array builder
      * @throws IllegalStateException when invoked after endArray method is
      * called.
+     * @throws NumberFormatException if value is Not-a-Number(NaN) or infinity
      */
     public JsonArrayBuilder<T> add(double value);
 

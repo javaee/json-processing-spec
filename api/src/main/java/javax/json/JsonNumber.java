@@ -103,7 +103,8 @@ public interface JsonNumber extends JsonValue {
      * Converts JSON number to an integer number.
      *
      * @return a number type
-     * @throws javax.json.JsonException when number will not fit in an {@code int}.
+     * @throws ArithmeticException cause if the number has a nonzero fractional
+     *         part, or will not fit in an {@code int}
      */
     public int getIntValueExact();
 
@@ -120,7 +121,8 @@ public interface JsonNumber extends JsonValue {
      * Converts JSON number to a long number.
      *
      * @return a long for JSON number
-     * @throws javax.json.JsonException when number will not fit in a {@code long}.
+     * @throws ArithmeticException if the number has a nonzero fractional
+     *         part, or will not fit in a {@code long}.
      */
     public long  getLongValueExact();
 
@@ -138,7 +140,7 @@ public interface JsonNumber extends JsonValue {
      * Converts JSON number to a {@code BigDecimal} number.
      *
      * @return a BigDecimal for JSON number
-     * @throws javax.json.JsonException when number will not fit in a {@code BigDecimal}.
+     * @throws ArithmeticException if the number has a nonzero fractional part.
      */
     public BigInteger getBigIntegerValueExact();
 

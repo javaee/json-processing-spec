@@ -156,6 +156,7 @@ public interface JsonObjectBuilder<T> {
      * in the JSON object
      * @throws IllegalStateException when invoked after the endObject method
      * is called
+     * @throws NumberFormatException if value is Not-a-Number(NaN) or infinity
      */
     public JsonObjectBuilder<T> add(String name, double value);
 
